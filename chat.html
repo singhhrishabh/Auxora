@@ -82,6 +82,30 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .step-list{margin-top:8px;display:flex;flex-direction:column;gap:6px}
 .step-item{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--text2)}
 .step-num{width:20px;height:20px;border-radius:50%;background:var(--blue-bg);color:var(--blue);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+/* ── Scanner UI ── */
+.upload-btn{background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:color .15s;flex-shrink:0}
+.upload-btn:hover{color:var(--blue)}
+.upload-btn svg{width:18px;height:18px}
+.scan-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:8px;font-size:12.5px}
+.scan-card .scan-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-weight:600;font-size:13px;color:var(--text)}
+.scan-card .scan-type-badge{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:600}
+.scan-badge-pass{background:#0f2818;color:#22c55e;border:1px solid #166534}
+.scan-badge-warn{background:#1f1500;color:#f59e0b;border:1px solid #92400e}
+.scan-badge-fail{background:#1f0a0a;color:#ef4444;border:1px solid #991b1b}
+.scan-fields{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-bottom:10px}
+.scan-field{display:flex;flex-direction:column;gap:1px}
+.scan-field-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.scan-field-value{font-size:12.5px;color:var(--text);font-weight:500}
+.scan-checks{display:flex;flex-direction:column;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.scan-check{display:flex;align-items:center;gap:6px;font-size:11.5px}
+.scan-check-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+.sc-pass{background:#0f2818;color:#22c55e}
+.sc-warn{background:#1f1500;color:#f59e0b}
+.sc-fail{background:#1f0a0a;color:#ef4444}
+.scan-progress{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text2)}
+.scan-spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -125,9 +149,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     </div>
     <div class="suggest-row" id="sugRow"></div>
     <div class="messages" id="msgs"></div>
+    <input type="file" id="docFileInput" accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none">
     <div class="input-bar">
       <div class="input-wrap">
-        <textarea class="chat-input" id="chatIn" rows="1" placeholder="Ask anything about UAE banking..."></textarea>
+        <button class="upload-btn" id="uploadBtn" title="Upload document for scanning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+        </button>
+        <textarea class="chat-input" id="chatIn" rows="1" placeholder="Ask anything or upload a document..."></textarea>
       </div>
       <button class="send-btn" id="sendBtn">
         <svg viewBox="0 0 16 16" fill="none"><path d="M1.5 8H14.5M10 3.5L14.5 8L10 12.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -135,6 +163,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     </div>
   </div>
 </div>
+<script src="doc-scanner.js"></script>
 <script src="auxora-engine.js"></script>
 </body>
 </html>
