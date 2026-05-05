@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Auxora UAE — Your AI-powered banking bridge. Handles documentation, answers questions, resolves disputes. 9 languages, 24/7.">
+  <title>Auxora UAE — AI Banking Bridge</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2300D9FF'/><stop offset='1' stop-color='%23FFB800'/></linearGradient></defs><path d='M16 2L28 10v12L16 30 4 22V10z' fill='none' stroke='url(%23g)' stroke-width='2'/><circle cx='16' cy='16' r='5' fill='url(%23g)'/></svg>">
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo"><svg class="logo-icon" viewBox="0 0 40 40" width="34" height="34"><defs><linearGradient id="logoGrad" x1="0" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#1A1A2E"/><stop offset="100%" stop-color="#3A3A5E"/></linearGradient></defs><path d="M20 3C20 3 35 8 35 18C35 28 20 37 20 37C20 37 5 28 5 18C5 8 20 3 20 3Z" fill="url(#logoGrad)" opacity="0.08" stroke="url(#logoGrad)" stroke-width="1.5"/><path d="M20 6C20 6 32 10 32 18.5C32 27 20 34 20 34C20 34 8 27 8 18.5C8 10 20 6 20 6Z" fill="none" stroke="url(#logoGrad)" stroke-width="1.8"/><polyline points="12,20 16,20 18,14 20,26 22,17 24,22 28,22" fill="none" stroke="url(#logoGrad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="logo-pulse-line"/></svg><span class="logo-text">A<span class="logo-ux">UX</span>ORA</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#bridge">How It Works</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+    </ul>
+    <a href="guide.html" class="nav-cta">Try Auxora AI →</a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero" style="height: 100vh; padding: 100px 24px 24px 24px; position: relative;">
+    <div style="position: relative; width: 100%; height: 100%; border-radius: 24px; overflow: hidden; display: flex; align-items: flex-end;">
+      <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_161253_c72b1869-400f-45ed-ac0c-52f68c2ed5bd.mp4" type="video/mp4" />
+      </video>
+      <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 100%); z-index: 1;"></div>
+      
+      <div style="position: relative; z-index: 10; padding: 48px; width: 100%; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div class="hero-text reveal" style="max-width: 600px; padding:0; background:transparent;">
+          <h1 class="hero-title" style="font-size: 3.5rem; letter-spacing: -0.04em; margin-bottom: 20px;">
+            <span class="anim-word" style="--i:0">Every</span> <span class="anim-word" style="--i:1">banking</span> <span class="anim-word" style="--i:2">task.</span><br>
+            <span class="gradient anim-word" style="--i:3">Handled</span> <span class="gradient anim-word" style="--i:4">by</span> <span class="gradient anim-word" style="--i:5">AI.</span>
+          </h1>
+          <p class="hero-subtitle anim-fade-up" style="--delay:0.8s; color: rgba(0,0,0,0.7); font-size: 1.1rem; margin-bottom: 30px; font-family: 'Inter', sans-serif;">
+            Auxora is the active bridge between you and the UAE banking system. It collects your information, generates document checklists, drafts bank emails, writes complaint letters, and escalates to regulators when banks fail. In 9 languages.
+          </p>
+          <div class="hero-actions anim-fade-up" style="--delay:1.1s" style="display: flex; gap: 16px;">
+            <a href="chat.html" style="display:inline-flex; align-items:center; gap:12px; background:#111; color:#fff; font-weight:500; padding:8px 8px 8px 32px; border-radius:50px; text-decoration:none; transition: background 0.2s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'">
+              Join us
+              <span style="background:#fff; border-radius:50%; padding:8px; display:flex;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <div style="margin-top: 60px; width: 100%; max-width: 400px; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+            <div class="marquee-track">
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Georgia', serif; font-weight: 700; font-size: 15px; letter-spacing: -0.02em;">Emirates NBD</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Arial', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: 0.08em;">ADCB</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Trebuchet MS', sans-serif; font-weight: 600; font-size: 15px; font-style: italic;">FAB</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Courier New', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.12em;">MASHREQ</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Georgia', serif; font-weight: 700; font-size: 15px; letter-spacing: -0.02em;">Emirates NBD</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Arial', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: 0.08em;">ADCB</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Trebuchet MS', sans-serif; font-weight: 600; font-size: 15px; font-style: italic;">FAB</span>
+              <span style="margin: 0 28px; color: rgba(0,0,0,0.6); font-family: 'Courier New', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.12em;">MASHREQ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card-wrap reveal" style="display: none;">
+          <!-- Hide original 3D card on desktop to match layout, or we can overlay it -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INFO GRID SECTION ═══ -->
+  <section class="info-section">
+    <div class="info-container">
+      <div class="info-header reveal">
+        <div>
+          <h2 class="section-title" style="font-size: 3rem; letter-spacing: -0.03em; margin-bottom: 30px;">Meet Auxora.</h2>
+          <button class="btn-primary" style="display:inline-flex; align-items:center; gap:12px; padding:8px 8px 8px 32px; border-radius:50px; background: #1A1A2E; color: white;">
+            Discover features
+            <span style="background:#fff; border-radius:50%; padding:8px; display:flex;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+        </div>
+        <div>
+          <p class="section-desc" style="font-size: 1.8rem; line-height: 1.5; color: rgba(0,0,0,0.7); max-width: none; text-align: left;">
+            Auxora identifies your banking problem, collects the right information, verifies your documents, fills forms, composes emails, and escalates when banks fail. It carries you across — not just gives directions.
+          </p>
+        </div>
+      </div>
+
+      <div class="info-grid reveal">
+        <div class="info-card bg-img span-2" style="background-image: url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260423_164207_f243351d-ed59-48ec-83a0-a5e996bdbe3c.png&w=1280&q=85');">
+          <h3 style="font-size: 1.8rem; font-weight: 500; letter-spacing: -0.02em; color:#111;">Banking that adapts</h3>
+          <p style="font-size: 1.1rem; color: rgba(0,0,0,0.7); max-width: 300px; margin-top: auto;">
+            Gain steady returns as your deposits are routed into top-performing strategies automatically.
+          </p>
+        </div>
+        
+        <div class="info-card" style="background: #2B2644;">
+          <h3 style="font-size: 1.6rem; font-weight: 500; color: #fff; line-height: 1.3;">Always fluid,<br>always secure.</h3>
+          <p style="font-size: 1.1rem; color: rgba(255,255,255,0.6); margin-top: auto;">
+            Keep fully dollar-anchored with on-demand access to funds — no lockups or waits.
+          </p>
+        </div>
+        
+        <div class="info-card" style="background: #2B2644;">
+          <h3 style="font-size: 1.6rem; font-weight: 500; color: #fff; line-height: 1.3;">Fully<br>automated</h3>
+          <p style="font-size: 1.1rem; color: rgba(255,255,255,0.6); margin-top: auto;">
+            Skip the task of filling forms yourself. Auxora handles OCR and submissions for you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BACKED BY MARQUEE ═══ -->
+  <section style="background: var(--bg-main); padding: 48px 24px; overflow: hidden; border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05);">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;">
+      <style>
+        @media(min-width: 768px) { .marquee-row { grid-template-columns: 1fr 3fr !important; } }
+      </style>
+      <div class="marquee-row" style="display: grid; grid-template-columns: 1fr; align-items: center; gap: 32px;">
+        <div>
+          <p style="color: rgba(0,0,0,0.7); font-size: 1rem; line-height: 1.6;">
+            Supported by leading<br>UAE institutions & regulators.
+          </p>
+        </div>
+        <div style="overflow: hidden;">
+          <div class="backers-track">
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Times New Roman', serif; font-size: 14px;">Central Bank UAE</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Arial Black', sans-serif; font-size: 16px; letter-spacing: 0.08em;">MOHRE</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Impact', sans-serif; font-size: 18px; letter-spacing: 0.05em;">DIFC</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Georgia', serif; font-size: 17px;">ADGM</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Helvetica', sans-serif; font-weight: 700; font-size: 15px;">Dubai Economy</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Times New Roman', serif; font-size: 14px;">Central Bank UAE</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Arial Black', sans-serif; font-size: 16px; letter-spacing: 0.08em;">MOHRE</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Impact', sans-serif; font-size: 18px; letter-spacing: 0.05em;">DIFC</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Georgia', serif; font-size: 17px;">ADGM</span>
+            <span style="margin: 0 40px; color: rgba(0,0,0,0.5); font-family: 'Helvetica', sans-serif; font-weight: 700; font-size: 15px;">Dubai Economy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BRIDGE FLOW — 3D ═══ -->
+  <section class="bridge-section" id="bridge">
+    <div class="section-header reveal">
+      <div class="section-label">How Auxora Works</div>
+      <h2 class="section-title">Your problems float in.<br>Solutions flow out.</h2>
+      <p class="section-desc">Tell Auxora what you need. It handles every banking step for you.</p>
+    </div>
+    <div class="bf-stage reveal">
+      <div class="bf-particles" id="bfParticles"></div>
+      <!-- USER NODE -->
+      <div class="bf-node bf-user-node">
+        <div class="bf-orbit">
+          <div class="bf-pill" style="--angle:0deg;--r:110px;--dur:18s;--d:0s">Emirates ID?</div>
+          <div class="bf-pill" style="--angle:60deg;--r:120px;--dur:20s;--d:0.4s">salary certificate</div>
+          <div class="bf-pill" style="--angle:120deg;--r:105px;--dur:16s;--d:0.8s">what documents?</div>
+          <div class="bf-pill" style="--angle:180deg;--r:115px;--dur:22s;--d:1.2s">KYC update</div>
+          <div class="bf-pill" style="--angle:240deg;--r:108px;--dur:19s;--d:1.6s">complaint letter?</div>
+          <div class="bf-pill" style="--angle:300deg;--r:118px;--dur:21s;--d:2s">which form?</div>
+        </div>
+        <div class="bf-avatar">
+          <div class="bf-avatar-glow"></div>
+          <span>👤</span>
+        </div>
+        <div class="bf-label">Customer</div>
+      </div>
+      <!-- BEAM 1 -->
+      <div class="bf-beam">
+        <div class="bf-beam-line"></div>
+        <div class="bf-beam-pulse"></div>
+        <div class="bf-beam-dot"></div>
+      </div>
+      <!-- AUXORA AI -->
+      <div class="bf-node bf-center-node">
+        <div class="bf-core">
+          <div class="bf-ring r1"></div>
+          <div class="bf-ring r2"></div>
+          <div class="bf-ring r3"></div>
+          <div class="bf-core-inner">A</div>
+        </div>
+        <div class="bf-label bf-label-glow">Auxora AI</div>
+        <div class="bf-chip">Complete applicant profile</div>
+      </div>
+      <!-- BEAM 2 -->
+      <div class="bf-beam">
+        <div class="bf-beam-line"></div>
+        <div class="bf-beam-pulse delay"></div>
+        <div class="bf-beam-dot"></div>
+      </div>
+      <!-- BANK -->
+      <div class="bf-node bf-bank-node">
+        <div class="bf-avatar bf-avatar-bank">
+          <div class="bf-avatar-glow bank-glow"></div>
+          <span>🏦</span>
+        </div>
+        <div class="bf-label">Bank System</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES — DASHBOARD STYLE ═══ -->
+  <section class="features-section" id="features">
+    <!-- Feature 1: Active Tasks Dashboard -->
+    <div class="feature-showcase">
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <div class="section-label">Banking Dashboard</div>
+          <h2 class="section-title">Your whole banking life.<br>One screen.</h2>
+          <p class="section-desc">Every document, every deadline, every status — Auxora tracks it all so you never miss a step.</p>
+        </div>
+        <div class="feature-visual">
+          <div class="dashboard-mockup">
+            <div class="dash-header">Active Banking Tasks <span class="dash-badge">4 in progress</span></div>
+            <div class="dash-card">
+              <div class="dash-row">
+                <span class="dash-avatar sa">SA</span>
+                <div class="dash-info">
+                  <strong>Salary Complaint</strong>
+                  <span class="dash-sub">WPS · MOHRE Filed</span>
+                </div>
+                <span class="dash-status ready">● Resolved</span>
+              </div>
+              <div class="dash-meta">Filed 2 days ago <span class="dash-link">↗ View</span></div>
+            </div>
+            <div class="dash-card flagged">
+              <div class="dash-row">
+                <span class="dash-avatar jc">JC</span>
+                <div class="dash-info">
+                  <strong>Home Loan Application</strong>
+                  <span class="dash-sub">Emirates NBD · AED 1.2M</span>
+                </div>
+                <span class="dash-status flag">△ Missing docs</span>
+              </div>
+              <div class="dash-meta">8/10 docs <span class="dash-tag warn">AECB report needed</span> <span class="dash-link">↗ View</span></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-row">
+                <span class="dash-avatar ap">AP</span>
+                <div class="dash-info">
+                  <strong>Account Opening</strong>
+                  <span class="dash-sub">Mashreq Neo · Zero Balance</span>
+                </div>
+                <span class="dash-status prog">● In progress</span>
+              </div>
+              <div class="dash-meta">3/4 docs <span class="dash-link">↗ View</span></div>
+            </div>
+            <div class="dash-activity">
+              <span class="dash-activity-dot"></span>
+              <div><strong>Auxora activity</strong><br><span style="opacity:0.6;font-size:0.72rem;">Drafted CBUAE complaint for salary case · Verified Sarah's bank statement</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2: Document Verification -->
+    <div class="feature-showcase">
+      <div class="feature-row reverse reveal">
+        <div class="feature-text">
+          <div class="section-label">Document Verification</div>
+          <h2 class="section-title">Catch problems before<br>the bank does.</h2>
+          <p class="section-desc">Auxora pre-checks every document against bank requirements. Missing signatures, expired IDs, wrong formats — caught instantly.</p>
+        </div>
+        <div class="feature-visual">
+          <div class="dashboard-mockup">
+            <div class="dash-header">Document Verification <span class="dash-badge warn">Review needed</span></div>
+            <div class="doc-file">
+              <span class="doc-icon">📄</span>
+              <div><strong>Salary_Certificate_2026.pdf</strong><br><span style="opacity:0.5;font-size:0.72rem;">Uploaded 2 min ago</span></div>
+            </div>
+            <div class="doc-section">AI Pre-Verification</div>
+            <div class="doc-check"><span>Document authenticity</span><span class="check-ok">✓ Verified</span></div>
+            <div class="doc-check"><span>Date within 3 months</span><span class="check-ok">✓ Verified</span></div>
+            <div class="doc-check"><span>Employer stamp present</span><span class="check-ok">✓ Verified</span></div>
+            <div class="doc-check flagged"><span>Salary amount matches WPS</span><span class="check-warn">△ Mismatch</span></div>
+            <div class="dash-activity">
+              <span class="dash-activity-dot"></span>
+              <div><strong>Auxora is asking...</strong><br><span style="opacity:0.6;font-size:0.72rem;">Your salary cert shows AED 8,500 but WPS record shows AED 8,200. Which is correct?</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: Multilingual -->
+    <div class="feature-showcase">
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <div class="section-label">Multilingual Voice</div>
+          <h2 class="section-title">Chat in any of<br>9 languages.</h2>
+          <p class="section-desc">Auxora detects your language automatically and adapts vocabulary to your literacy level — a construction worker gets simpler language than a corporate treasurer.</p>
+          <ul class="feature-list">
+            <li>Instant answers, any time</li>
+            <li>Vocabulary adapted to education level</li>
+            <li>Auto-detect — just type naturally</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="dashboard-mockup chat-mock">
+            <div class="mockup-tabs">
+              <span class="mockup-tab active">English</span>
+              <span class="mockup-tab">العربية</span>
+              <span class="mockup-tab">हिन्दी</span>
+              <span class="mockup-tab">Filipino</span>
+            </div>
+            <div class="mock-chat-area">
+              <div class="mockup-msg bot"><span class="mockup-name">Auxora</span>Your WPS salary hasn't been paid for 6 weeks? This is a <strong>criminal violation</strong>. Call MOHRE at <strong>800-60</strong> right now — it's free.</div>
+              <div class="mockup-msg user">What documents do I need?</div>
+              <div class="mockup-msg bot"><span class="mockup-name">Auxora</span>Just your <strong>Emirates ID</strong>. Download the <strong>MOHRE app</strong> and file complaint — takes 5 minutes. I'll walk you through each step.</div>
+            </div>
+            <div class="mock-actions">
+              <span class="mock-action-btn">File complaint now</span>
+              <span class="mock-action-btn outline">Ask another question</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DASHBOARD TABS ═══ -->
+  <section class="tabs-section" id="dashboard">
+    <div class="section-header reveal">
+      <div class="section-label">How Auxora Helps</div>
+      <h2 class="section-title">Built for every person in the UAE.</h2>
+    </div>
+    <div class="tabs-container reveal">
+      <div class="tabs-bar">
+        <button class="tab-btn active" data-tab="workers">Workers & Labourers</button>
+        <button class="tab-btn" data-tab="students">Students</button>
+        <button class="tab-btn" data-tab="business">Business Owners</button>
+        <button class="tab-btn" data-tab="families">Families</button>
+      </div>
+      <div class="tab-content active" id="tab-workers">
+        <div class="tab-text">
+          <p class="tab-highlight">Very simple language. Short sentences. Zero jargon.</p>
+          <p>WPS non-payment is a criminal violation — Auxora generates your MOHRE complaint immediately. Exchange houses save AED 1,500-2,000/year on remittance vs bank SWIFT. MOHRE hotline 800-60, free, 24/7. Your employer gets blacklisted. You have full legal protection.</p>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-cards">
+            <div class="tab-card">💼 WPS salary tracking</div>
+            <div class="tab-card">📞 MOHRE complaint (800-60)</div>
+            <div class="tab-card">💸 Remittance comparison</div>
+            <div class="tab-card">🚨 Emergency fraud hotline</div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-students">
+        <div class="tab-text">
+          <p class="tab-highlight">Zero-balance accounts. Open from phone in 10 minutes.</p>
+          <p>Liv by Emirates NBD, Mashreq Neo, FAB Mobile, ADCB Hayyak — no branch visit, no minimum balance, no salary certificate. Under 21? Guardian must be present. Auxora walks you through every step.</p>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-cards">
+            <div class="tab-card">🏦 Zero-balance account guide</div>
+            <div class="tab-card">💳 Instant virtual debit card</div>
+            <div class="tab-card">📱 App-based onboarding</div>
+            <div class="tab-card">🎓 Student-specific rates</div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-business">
+        <div class="tab-text">
+          <p class="tab-highlight">Trade license validity is critical. Expired = instant rejection.</p>
+          <p>Mohammed Bin Rashid Fund — SME loans up to AED 3 million, no collateral. Khalifa Fund for Abu Dhabi. Auxora replaces the bank liaison officer entirely — LC document checklists, BG applications, WPS payroll setup. Save AED 2,000-6,000/month.</p>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-cards">
+            <div class="tab-card">🏢 Corporate account setup</div>
+            <div class="tab-card">💰 MBR Fund (AED 3M)</div>
+            <div class="tab-card">📋 Trade license checklist</div>
+            <div class="tab-card">🧾 VAT registration guide</div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-families">
+        <div class="tab-text">
+          <p class="tab-highlight">Without a DIFC Will, UAE law governs everything.</p>
+          <p>Non-Muslim expats: register a DIFC Will at difcwills.com — AED 900-2,500, takes one afternoon. Joint accounts in "Either or Survivor" mode. Deceased account procedures guided step by step with empathy first, documents second. Auxora never lets you give up.</p>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-cards">
+            <div class="tab-card">👨‍👩‍👧 Joint account setup</div>
+            <div class="tab-card">📝 DIFC Will registration</div>
+            <div class="tab-card">🏠 Home loan guidance</div>
+            <div class="tab-card">🕊️ Deceased account process</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats" id="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-number" data-target="9">0</div><div class="stat-label">Languages</div></div>
+      <div class="stat-item reveal"><div class="stat-number" data-target="50" data-suffix="+">0</div><div class="stat-label">Banking Procedures</div></div>
+      <div class="stat-item reveal"><div class="stat-number" data-target="24" data-suffix="/7">0</div><div class="stat-label">Availability</div></div>
+      <div class="stat-item reveal"><div class="stat-number" data-target="100" data-suffix="%">0</div><div class="stat-label">Free to Use</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ USE CASES SECTION ═══ -->
+  <section style="background: var(--bg-main); padding: 100px 24px;">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; gap: 40px; align-items: start;" class="use-cases-grid reveal">
+      <div style="padding-top: 16px;">
+        <p style="color: rgba(0,0,0,0.6); font-size: 0.9rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Auxora in Practice</p>
+        <h2 style="font-size: 3.5rem; font-weight: 500; line-height: 1; margin-bottom: 24px; color: #111; letter-spacing: -0.04em;">
+          Use modes
+        </h2>
+        <p style="color: rgba(0,0,0,0.6); font-size: 1.1rem; line-height: 1.6; max-width: 400px;">
+          Auxora powers a wide range of modes for builders, companies, and individuals wanting safe and rewarding banking integrations plus much more.
+        </p>
+      </div>
+      
+      <div style="position: relative; border-radius: 24px; overflow: hidden; min-height: 720px; width: 100%;">
+        <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_183428_ab5e672a-f608-4dcb-b319-f3e040f02e2d.mp4" type="video/mp4" />
+        </video>
+        
+        <div style="position: relative; z-index: 10; padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; min-height: 720px;">
+          <h3 style="font-size: 3rem; font-weight: 500; line-height: 1.1; margin-bottom: 20px; color: #111; letter-spacing: -0.03em;">
+            Commerce
+          </h3>
+          <p style="color: rgba(0,0,0,0.7); font-size: 1.1rem; max-width: 450px; margin-bottom: 32px; background: rgba(255,255,255,0.4); padding: 16px; border-radius: 12px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+            Lift customer retention by offering Auxora's AI bridge, a trusted banking assistant with strong integrations, letting your patrons solve banking issues with zero effort on your platform.
+          </p>
+          <a href="chat.html" style="display:inline-flex; align-items:center; gap:12px; font-weight:500; color:#111; text-decoration:none;">
+            <span style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.8); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition: background 0.2s;" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.8)'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+            Know more
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer" id="footer">
+    <div class="footer-emergency">
+      <span class="em-title">🚨 Emergency Hotlines</span>
+      <span class="em-item"><strong>Emirates NBD:</strong> 600 54 0000</span>
+      <span class="em-item"><strong>ADCB:</strong> 600 50 2030</span>
+      <span class="em-item"><strong>FAB:</strong> 600 52 5500</span>
+      <span class="em-item"><strong>MOHRE:</strong> 800-60</span>
+      <span class="em-item"><strong>Cybercrime:</strong> ecrime.ae</span>
+    </div>
+    <div class="footer-top">
+      <div class="footer-brand" style="display:flex;flex-direction:column;gap:14px;">
+        <div class="nav-logo" style="font-size:1.4rem;"><svg class="logo-icon" viewBox="0 0 40 40" width="28" height="28"><defs><linearGradient id="logoGrad2" x1="0" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#1A1A2E"/><stop offset="100%" stop-color="#3A3A5E"/></linearGradient></defs><path d="M20 6C20 6 32 10 32 18.5C32 27 20 34 20 34C20 34 8 27 8 18.5C8 10 20 6 20 6Z" fill="none" stroke="url(#logoGrad2)" stroke-width="1.8"/><polyline points="12,20 16,20 18,14 20,26 22,17 24,22 28,22" fill="none" stroke="url(#logoGrad2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="logo-text">A<span class="logo-ux">UX</span>ORA</span></div>
+        <p>Banking for everyone in the UAE. In every language. At every step.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#features">Account Services</a>
+          <a href="#features">Fraud & Disputes</a>
+          <a href="#features">Loans & Credit</a>
+          <a href="#features">Document Assistant</a>
+        </div>
+        <div class="footer-col">
+          <h4>Languages</h4>
+          <a href="#">English</a>
+          <a href="#">Arabic العربية</a>
+          <a href="#">Hindi हिन्दी</a>
+          <a href="#">+ 6 More</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">CBUAE Portal</a>
+          <a href="#">MOHRE Complaints</a>
+          <a href="#">DIFC Wills</a>
+          <a href="#">AECB Score</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Auxora UAE. Your Banking Bridge.</span>
+      <span>Not a licensed financial advisor. Guidance only.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <!-- ═══ FLOATING AI CHAT BUTTON + PANEL ═══ -->
+  <style>
+    .ai-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      box-shadow: 0 4px 24px rgba(59,130,246,0.45), 0 0 0 0 rgba(59,130,246,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: fabPulse 2.5s infinite;
+    }
+    .ai-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 32px rgba(59,130,246,0.6);
+      animation: none;
+    }
+    .ai-fab svg { width: 28px; height: 28px; }
+    .ai-fab .fab-close { display: none; }
+    .ai-fab.open .fab-icon { display: none; }
+    .ai-fab.open .fab-close { display: block; }
+    .ai-fab.open {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 4px 24px rgba(239,68,68,0.4);
+      animation: none;
+    }
+
+    @keyframes fabPulse {
+      0% { box-shadow: 0 4px 24px rgba(59,130,246,0.45), 0 0 0 0 rgba(59,130,246,0.35); }
+      70% { box-shadow: 0 4px 24px rgba(59,130,246,0.45), 0 0 0 18px rgba(59,130,246,0); }
+      100% { box-shadow: 0 4px 24px rgba(59,130,246,0.45), 0 0 0 0 rgba(59,130,246,0); }
+    }
+
+    .ai-fab-label {
+      position: fixed;
+      bottom: 96px;
+      right: 28px;
+      z-index: 9998;
+      background: #1a1a2e;
+      color: #e8e8e8;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      border: 1px solid #2a2a3e;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .ai-fab:hover + .ai-fab-label,
+    .ai-fab-label.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ai-fab-label::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 22px;
+      width: 12px;
+      height: 12px;
+      background: #1a1a2e;
+      border-right: 1px solid #2a2a3e;
+      border-bottom: 1px solid #2a2a3e;
+      transform: rotate(45deg);
+    }
+
+    .ai-chat-panel {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      z-index: 9998;
+      width: 420px;
+      height: 600px;
+      max-height: calc(100vh - 140px);
+      max-width: calc(100vw - 40px);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      box-shadow: 0 12px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(59,130,246,0.15);
+      transform: translateY(20px) scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s;
+    }
+    .ai-chat-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+    .ai-chat-panel iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #0d0d0d;
+    }
+
+    .ai-chat-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9997;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .ai-chat-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    @media (max-width: 480px) {
+      .ai-chat-panel {
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        max-width: 100vw;
+        border-radius: 0;
+      }
+      .ai-chat-panel.open { transform: translateY(0) scale(1); }
+      .ai-fab { bottom: 20px; right: 20px; width: 54px; height: 54px; }
+      .ai-fab svg { width: 24px; height: 24px; }
+      .ai-fab-label { display: none; }
+    }
+  </style>
+
+  <button class="ai-fab" id="aiFab" aria-label="Open AI Chat">
+    <svg class="fab-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <circle cx="12" cy="10" r="1" fill="white" stroke="none"/>
+      <circle cx="8" cy="10" r="1" fill="white" stroke="none"/>
+      <circle cx="16" cy="10" r="1" fill="white" stroke="none"/>
+    </svg>
+    <svg class="fab-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+  <div class="ai-fab-label" id="aiFabLabel">Ask Auxora AI anything</div>
+
+  <div class="ai-chat-backdrop" id="aiBackdrop"></div>
+  <div class="ai-chat-panel" id="aiPanel">
+    <iframe id="aiFrame" loading="lazy"></iframe>
+  </div>
+
+  <script>
+  (function() {
+    var fab = document.getElementById('aiFab');
+    var panel = document.getElementById('aiPanel');
+    var backdrop = document.getElementById('aiBackdrop');
+    var frame = document.getElementById('aiFrame');
+    var label = document.getElementById('aiFabLabel');
+    var isOpen = false;
+    var loaded = false;
+
+    function toggle() {
+      isOpen = !isOpen;
+      fab.classList.toggle('open', isOpen);
+      panel.classList.toggle('open', isOpen);
+      backdrop.classList.toggle('open', isOpen);
+
+      if (isOpen && !loaded) {
+        frame.src = 'chat.html';
+        loaded = true;
+      }
+
+      if (isOpen) {
+        label.classList.remove('show');
+      }
+    }
+
+    fab.addEventListener('click', toggle);
+    backdrop.addEventListener('click', toggle);
+
+    // Show tooltip after 3 seconds
+    setTimeout(function() {
+      if (!isOpen) {
+        label.classList.add('show');
+        setTimeout(function() { label.classList.remove('show'); }, 4000);
+      }
+    }, 3000);
+  })();
+  </script>
+
+</body>
+</html>
