@@ -175,13 +175,21 @@ body{font-family:'Inter',sans-serif;font-size:14px;color:#111;background:#fff;mi
   <div class="barwrap"><div class="bar" id="readbar" style="width:0%"></div></div>
   <div style="font-size:11px;color:#888;margin-bottom:8px" id="barlabel">Upload documents to verify</div>
   <div id="verdictbox" style="display:none" class="verdict vw"></div>
-  <div class="upload" id="uploadZone">
-    <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none">
-    <div style="font-size:24px;margin-bottom:8px">📄</div>
-    <div style="font-size:13px;color:#666">Drag & drop or <span style="color:#111;cursor:pointer;text-decoration:underline;font-weight:500" onclick="document.getElementById('fileInput').click()">browse files</span></div>
-    <div style="font-size:11px;color:#bbb;margin-top:5px">PDF, JPG, PNG, DOC — AI verifies instantly</div>
-    <div id="uploadedFiles" style="margin-top:12px;text-align:left"></div>
+  <div class="upload" id="uploadZone" ondragover="event.preventDefault();this.style.borderColor='#111';this.style.background='#f0f0f0'" ondragleave="this.style.borderColor='#e5e5e5';this.style.background='#fafafa'" ondrop="event.preventDefault();this.style.borderColor='#e5e5e5';this.style.background='#fafafa';handleGuideUpload(event.dataTransfer.files)">
+    <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none" onchange="handleGuideUpload(this.files)">
+    <div style="font-size:28px;margin-bottom:8px">🔍</div>
+    <div style="font-size:14px;color:#333;font-weight:600;margin-bottom:4px">AI Document Scanner</div>
+    <div style="font-size:13px;color:#666">Drag &amp; drop or <span style="color:#111;cursor:pointer;text-decoration:underline;font-weight:500" onclick="document.getElementById('fileInput').click()">browse files</span></div>
+    <div style="font-size:11px;color:#bbb;margin-top:5px">Upload Emirates ID, salary certificate, passport — AI extracts &amp; verifies</div>
   </div>
+  <div id="scanProgress" style="display:none;margin-bottom:12px">
+    <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;background:#f5f5f5;border:1px solid #eee;border-radius:10px">
+      <div style="width:16px;height:16px;border:2px solid #ddd;border-top-color:#111;border-radius:50%;animation:guideSpin .8s linear infinite"></div>
+      <span id="scanProgressText" style="font-size:12px;color:#555">Scanning document...</span>
+    </div>
+    <style>@keyframes guideSpin{to{transform:rotate(360deg)}}</style>
+  </div>
+  <div id="scanResults" style="margin-bottom:16px"></div>
   <div class="lbl">Step-by-step guide</div>
   <div class="stepwrap" id="steplist"></div>
   <div id="s2alert"></div>
@@ -1348,6 +1356,143 @@ function showTab(id,el){
 }
 
 init();
+
+// ═══ GUIDE PAGE SCANNER INTEGRATION ═══
+var guideScannedDocs = [];
+
+function handleGuideUpload(files) {
+  if (!files || !files.length) return;
+  for (var i = 0; i < files.length; i++) { scanGuideFile(files[i]); }
+}
+
+function scanGuideFile(file) {
+  var prog = document.getElementById('scanProgress');
+  var progTxt = document.getElementById('scanProgressText');
+  prog.style.display = 'block';
+  progTxt.textContent = 'Reading ' + file.name + '...';
+
+  var apiCfg = {};
+  try { apiCfg = JSON.parse(localStorage.getItem('auxora_api') || '{}'); } catch(e) {}
+  var key = (apiCfg.provider === 'gemini' && apiCfg.key) ? apiCfg.key : '';
+
+  var procId = '';
+  if (typeof curProc !== 'undefined' && curProc) procId = curProc.id || '';
+
+  AuxoraScanner.scan(file, {
+    apiKey: key,
+    procedureId: procId,
+    onProgress: function(stage, msg) { progTxt.textContent = msg; }
+  }).then(function(result) {
+    prog.style.display = 'none';
+    guideScannedDocs.push(result);
+    renderGuideResult(result, file.name);
+    updateReadiness();
+  }).catch(function(err) {
+    prog.style.display = 'none';
+    var r = document.getElementById('scanResults');
+    r.innerHTML += '<div class="alert ae" style="margin-bottom:8px">Failed to scan ' + file.name + ': ' + err.message + '</div>';
+  });
+}
+
+function renderGuideResult(result, fileName) {
+  var r = document.getElementById('scanResults');
+  var s = result.verification.overallStatus;
+  var badgeCls = s === 'pass' ? 'tag-o' : (s === 'warn' ? 'tag-c' : 'tag-r');
+  var badgeText = s === 'pass' ? '✓ Verified' : (s === 'warn' ? '⚠ Review' : '✗ Issues');
+
+  var h = '<div class="doccard" style="flex-direction:column;align-items:stretch;margin-bottom:10px">';
+  h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+  h += '<span style="font-size:18px">📄</span>';
+  h += '<div style="flex:1"><div class="dname">' + escH(result.documentLabel) + ' <span class="tag ' + badgeCls + '">' + badgeText + '</span></div>';
+  h += '<div class="dnote">' + escH(fileName) + '</div></div></div>';
+
+  // Extracted fields grid
+  var fields = result.fields || {};
+  var keys = Object.keys(fields).filter(function(k) { return fields[k] !== null && fields[k] !== undefined && fields[k] !== ''; });
+  if (keys.length > 0) {
+    h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-bottom:8px;padding:10px;background:#f9f9f9;border-radius:8px;border:1px solid #eee">';
+    var labels = {
+      fullName:'Full Name',nameArabic:'Arabic Name',idNumber:'ID Number',nationality:'Nationality',
+      dateOfBirth:'Date of Birth',expiryDate:'Expiry Date',gender:'Gender',occupation:'Occupation',
+      passportNumber:'Passport No.',issueDate:'Issue Date',employerName:'Employer',employeeName:'Employee',
+      designation:'Designation',basicSalary:'Basic Salary',totalSalary:'Total Salary',stampPresent:'Stamp Present',
+      companyName:'Company',licenseNumber:'License No.',accountHolder:'Account Holder',accountNumber:'Account No.',
+      bankName:'Bank',closingBalance:'Balance',creditScore:'Credit Score',visaNumber:'Visa No.',sponsor:'Sponsor'
+    };
+    keys.forEach(function(k) {
+      var val = fields[k];
+      if (typeof val === 'boolean') val = val ? 'Yes ✓' : 'No ✗';
+      h += '<div style="margin-bottom:2px"><div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.05em;font-weight:600">' + (labels[k] || k) + '</div>';
+      h += '<div style="font-size:12px;color:#111;font-weight:500">' + escH(String(val)) + '</div></div>';
+    });
+    h += '</div>';
+  }
+
+  // Verification checks
+  var checks = result.verification.checks || [];
+  if (checks.length > 0) {
+    checks.forEach(function(c) {
+      var dot = c.status === 'pass' ? 'ok' : (c.status === 'warn' ? 'wn' : 'ng');
+      var ico = c.status === 'pass' ? '✓' : (c.status === 'warn' ? '!' : '✗');
+      h += '<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;margin-bottom:3px">';
+      h += '<span class="dot ' + dot + '" style="width:16px;height:16px;font-size:9px">' + ico + '</span>';
+      h += '<span><strong>' + escH(c.label) + ':</strong> ' + escH(c.detail) + '</span></div>';
+    });
+  }
+
+  // Errors/warnings
+  if (result.verification.errors.length > 0) {
+    h += '<div class="alert ae" style="margin-top:6px;padding:8px 10px;font-size:12px">';
+    result.verification.errors.forEach(function(e) { h += '🚨 ' + escH(e) + '<br>'; });
+    h += '</div>';
+  }
+  if (result.verification.warnings.length > 0) {
+    h += '<div class="alert aw" style="margin-top:4px;padding:8px 10px;font-size:12px">';
+    result.verification.warnings.forEach(function(w) { h += '⚠️ ' + escH(w) + '<br>'; });
+    h += '</div>';
+  }
+
+  h += '</div>';
+  r.innerHTML += h;
+}
+
+function updateReadiness() {
+  if (typeof curProc === 'undefined' || !curProc || !curProc.docs) return;
+  var total = curProc.docs.length;
+  var matched = 0;
+  var scannedTypes = guideScannedDocs.map(function(d) { return d.documentType; });
+  var procReq = AuxoraScanner.PROCEDURE_DOCS[curProc.id] || [];
+  procReq.forEach(function(dt) { if (scannedTypes.includes(dt)) matched++; });
+  var pct = total > 0 ? Math.round((matched / total) * 100) : 0;
+  var bar = document.getElementById('readbar');
+  var lbl = document.getElementById('barlabel');
+  var vbox = document.getElementById('verdictbox');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) lbl.textContent = matched + ' of ' + total + ' documents verified (' + pct + '%)';
+  if (vbox && pct === 100) {
+    vbox.style.display = 'flex';
+    vbox.className = 'verdict vr';
+    vbox.innerHTML = '✅ All documents verified — you are ready to proceed!';
+  } else if (vbox && matched > 0) {
+    vbox.style.display = 'flex';
+    vbox.className = 'verdict vw';
+    vbox.innerHTML = '⚠️ ' + (total - matched) + ' document(s) still needed';
+  }
+
+  // Cross-validation
+  if (guideScannedDocs.length >= 2) {
+    var crossResults = AuxoraScanner.crossValidate(guideScannedDocs);
+    var r = document.getElementById('scanResults');
+    crossResults.forEach(function(cr) {
+      var cls = cr.status === 'pass' ? 'as' : 'aw';
+      r.innerHTML += '<div class="alert ' + cls + '" style="font-size:12px;padding:8px 10px">' + (cr.status === 'pass' ? '✓' : '⚠') + ' ' + escH(cr.detail) + '</div>';
+    });
+  }
+}
+
+function escH(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 </script>
+<script src="doc-scanner.js"></script>
 </body>
 </html>
