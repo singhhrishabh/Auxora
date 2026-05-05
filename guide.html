@@ -1,0 +1,1353 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auxora UAE — Banking Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fadeInUp .5s ease-out forwards;opacity:0}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;font-size:14px;color:#111;background:#fff;min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #f0f0f0;background:#fff;position:sticky;top:0;z-index:100}
+.logo{font-size:17px;font-weight:600;color:#111;display:flex;align-items:center;gap:6px}
+.logo em{color:#111;font-style:normal;font-weight:700}
+.logo sub{font-size:9px;color:#999;font-weight:400;vertical-align:middle;margin-left:2px}
+.back-link{font-size:13px;color:#666;text-decoration:none;padding:6px 14px;border:1px solid #e5e5e5;border-radius:99px;transition:all .15s;font-weight:500}
+.back-link:hover{border-color:#111;color:#111}
+.tabnav{display:flex;background:#f5f5f5;border-radius:10px;padding:3px;margin:16px 0;gap:2px}
+.tab{flex:1;padding:10px 4px;text-align:center;font-size:12px;font-weight:500;cursor:pointer;color:#888;border-radius:8px;transition:all .2s;border:none;background:transparent}
+.tab.on{color:#111;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);font-weight:600}
+.tab:hover:not(.on){color:#555}
+.tab-ico{font-size:14px;display:block;margin-bottom:2px}
+.scr{display:none;padding:0 0 60px}
+.scr.on{display:block}
+.hero{background:#f9f9f9;border-left:3px solid #111;padding:16px 18px;margin-bottom:20px;font-size:14px;line-height:1.65;color:#555;border-radius:10px}
+.lbl{font-size:10px;font-weight:600;color:#999;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;margin-top:20px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:20px}
+.pcard{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:14px;cursor:pointer;text-align:left;width:100%;transition:all .2s}
+.pcard:hover{border-color:#111;box-shadow:0 2px 12px rgba(0,0,0,.06);transform:translateY(-2px)}
+.pcard-ico{font-size:20px;margin-bottom:6px}
+.pcard-name{font-size:12px;font-weight:600;color:#111;line-height:1.3}
+.pcard-sub{font-size:11px;color:#999;margin-top:3px}
+.proclist{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.proc{background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s}
+.proc:hover{border-color:#111;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.proc-t{font-size:13px;font-weight:600;color:#111}
+.proc-d{font-size:11px;color:#999;margin-top:2px}
+.btn{padding:8px 16px;border-radius:99px;border:1px solid #e5e5e5;background:#fff;font-size:12px;cursor:pointer;color:#111;font-family:'Inter',sans-serif;transition:all .15s;font-weight:500}
+.btn:hover{border-color:#111}
+.btnp{background:#111;color:#fff;border-color:#111}
+.btnp:hover{background:#333}
+.btns{background:#166534;color:#fff;border-color:#166534}
+.btnw{background:#fffbeb;color:#92400e;border-color:#fde68a}
+.srch{width:100%;padding:12px 16px;border-radius:10px;border:1px solid #e5e5e5;background:#fff;color:#111;font-size:14px;font-family:'Inter',sans-serif;margin-bottom:16px;outline:none;transition:all .15s}
+.srch:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,0,0,.04)}
+.srch::placeholder{color:#bbb}
+.bc{display:flex;align-items:center;gap:5px;font-size:12px;color:#999;margin-bottom:12px;flex-wrap:wrap}
+.bcl{color:#111;cursor:pointer;font-weight:500}
+.bcl:hover{text-decoration:underline}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.met{background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:14px;text-align:center}
+.mval{font-size:24px;font-weight:700;color:#111}
+.mlbl{font-size:10px;color:#999;margin-top:3px;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
+.doccard{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;transition:all .15s}
+.doccard:hover{border-color:#ddd}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid #ddd;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;color:#bbb;transition:all .2s}
+.dot.ok{background:#dcfce7;border-color:#22c55e;color:#16a34a}
+.dot.ng{background:#fee2e2;border-color:#ef4444;color:#dc2626}
+.dot.wn{background:#fef3c7;border-color:#f59e0b;color:#d97706}
+.dtxt{flex:1}
+.dname{font-size:13px;font-weight:600;color:#111}
+.dnote{font-size:11px;color:#999;margin-top:2px}
+.tag{font-size:9px;padding:2px 8px;border-radius:99px;font-weight:600;margin-left:6px}
+.tag-r{background:#fee2e2;color:#dc2626}
+.tag-o{background:#dcfce7;color:#16a34a}
+.tag-c{background:#fef3c7;color:#d97706}
+.barwrap{background:#f0f0f0;border-radius:99px;height:6px;margin:6px 0;overflow:hidden}
+.bar{height:100%;border-radius:99px;background:linear-gradient(90deg,#111,#555);transition:width .6s}
+.stepwrap{display:flex;flex-direction:column;gap:0;margin-bottom:20px}
+.step{display:flex;gap:10px;padding-bottom:14px;position:relative}
+.step:not(:last-child)::before{content:'';position:absolute;left:10px;top:22px;bottom:0;width:1px;background:#eee}
+.snum{width:22px;height:22px;border-radius:50%;background:#f5f5f5;color:#111;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #e5e5e5}
+.snum.done{background:#dcfce7;color:#16a34a;border-color:#bbf7d0}
+.stitle{font-size:13px;font-weight:600;color:#111;padding-top:2px}
+.sdet{font-size:12px;color:#888;margin-top:2px;line-height:1.5}
+.alert{padding:14px 16px;border-radius:10px;font-size:13px;margin-bottom:12px;line-height:1.6}
+.ai{background:#eff6ff;color:#1e40af;border-left:3px solid #3b82f6}
+.aw{background:#fffbeb;color:#92400e;border-left:3px solid #f59e0b}
+.as{background:#f0fdf4;color:#166534;border-left:3px solid #22c55e}
+.ae{background:#fef2f2;color:#991b1b;border-left:3px solid #ef4444}
+.upload{border:2px dashed #e5e5e5;border-radius:14px;padding:24px;text-align:center;cursor:pointer;margin-bottom:16px;transition:all .15s;background:#fafafa}
+.upload:hover{background:#f0f0f0;border-color:#bbb}
+.verdict{display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:12px}
+.vr{background:#f0fdf4;color:#166534}
+.vw{background:#fffbeb;color:#92400e}
+.divider{height:1px;background:#f0f0f0;margin:20px 0}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.faq-item{border:1px solid #eee;border-radius:10px;margin-bottom:6px;overflow:hidden}
+.faq-q{padding:12px 14px;cursor:pointer;font-size:13px;font-weight:600;color:#111;display:flex;justify-content:space-between;align-items:center;background:#fff;transition:background .15s}
+.faq-q:hover{background:#f9f9f9}
+.faq-a{display:none;padding:12px 14px;font-size:13px;color:#555;border-top:1px solid #f0f0f0;line-height:1.7;background:#fafafa}
+.faq-a.on{display:block}
+.faq-a .step-mini{display:flex;gap:8px;margin:4px 0}
+.faq-a .sn-mini{width:18px;height:18px;border-radius:50%;background:#111;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.faq-cat{font-size:11px;font-weight:600;color:#999;letter-spacing:.07em;text-transform:uppercase;margin:18px 0 8px}
+.faq-srch{width:100%;padding:12px 16px;border-radius:10px;border:1px solid #e5e5e5;background:#fff;color:#111;font-size:14px;font-family:'Inter',sans-serif;margin-bottom:16px;outline:none}
+.faq-srch:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,0,0,.04)}
+.faq-srch::placeholder{color:#bbb}
+.email-cat{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.etag{padding:6px 14px;border-radius:99px;border:1px solid #e5e5e5;font-size:12px;cursor:pointer;background:#fff;color:#666;font-family:'Inter',sans-serif;transition:all .15s;font-weight:500}
+.etag:hover{border-color:#111;color:#111}
+.etag.on{background:#111;color:#fff;border-color:#111}
+.email-preview{background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:18px;font-size:13px;line-height:1.8;margin-bottom:16px;white-space:pre-wrap;font-family:'Inter',sans-serif;min-height:220px;color:#333}
+.email-meta{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.email-field{flex:1;min-width:140px}
+.email-field label{font-size:11px;color:#888;display:block;margin-bottom:4px;font-weight:600}
+.email-field input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e5e5e5;background:#fff;color:#111;font-size:13px;font-family:'Inter',sans-serif;outline:none}
+.email-field input:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,0,0,.04)}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:99px;background:#111;color:#fff;border:none;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;font-weight:500}
+.copy-btn:hover{background:#333}
+.copy-btn.copied{background:#166534}
+.perrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.per{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:99px;border:1px solid #e5e5e5;cursor:pointer;background:#fff;font-size:12px;color:#666;font-family:'Inter',sans-serif;transition:all .15s;font-weight:500}
+.per:hover{border-color:#111;color:#111}
+.per.on{background:#111;color:#fff;border-color:#111}
+.per-ico{font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#111;border-radius:6px;margin-right:4px"><span style="color:#fff;font-size:12px">★</span></span>Au<em>xora</em><sub>UAE</sub></div>
+  <a href="index.html" class="back-link">← Dashboard</a>
+</div>
+
+<!-- TAB NAV -->
+<div class="tabnav">
+  <div class="tab on" onclick="showTab('home',this)"><span class="tab-ico">🏠</span>Home</div>
+  <div class="tab" onclick="showTab('faq',this)"><span class="tab-ico">❓</span>FAQ</div>
+  <div class="tab" onclick="showTab('email',this)"><span class="tab-ico">📧</span>Email</div>
+  <div class="tab" onclick="showTab('guide',this)" id="guideTab" style="display:none"><span class="tab-ico">📋</span>Guide</div>
+</div>
+
+<!-- HOME SCREEN -->
+<div id="scr-home" class="scr on">
+  <div class="hero" id="heroMsg">Hello! I'm Auxora — your active UAE banking bridge. I collect information, verify documents, fill forms, write emails, and guide every step. Choose below or describe your problem.</div>
+
+  <div class="lbl">Who are you?</div>
+  <div class="perrow" id="perrow"></div>
+
+  <input class="srch" id="srch" placeholder="Describe your problem... e.g. 'card stuck at delivery' or 'salary not received'" oninput="doSearch(this.value)" />
+
+  <div class="lbl" id="catLabel">All services</div>
+  <div class="pgrid" id="catgrid"></div>
+</div>
+
+<!-- PROCEDURE LIST -->
+<div id="scr-procs" class="scr">
+  <div class="bc"><span class="bcl" onclick="showTab('home')">Home</span><span>›</span><span id="bc1"></span></div>
+  <div class="hero" id="s1msg"></div>
+  <div class="lbl">Select procedure</div>
+  <div class="proclist" id="proclist"></div>
+  <button class="btn" onclick="showTab('home')">← Back</button>
+</div>
+
+<!-- GUIDE SCREEN -->
+<div id="scr-guide" class="scr">
+  <div class="bc"><span class="bcl" onclick="showTab('home')">Home</span><span>›</span><span class="bcl" onclick="showTab('procs')" id="bc2a"></span><span>›</span><span id="bc2b"></span></div>
+  <div class="hero" id="s2msg"></div>
+  <div class="alert ai" id="s2tip"></div>
+  <div class="metrics">
+    <div class="met"><div class="mval" id="mdocs">—</div><div class="mlbl">Documents</div></div>
+    <div class="met"><div class="mval" id="mdays">—</div><div class="mlbl">Days</div></div>
+    <div class="met"><div class="mval" id="mvisits">—</div><div class="mlbl">Bank visits</div></div>
+  </div>
+  <div class="lbl">Required documents</div>
+  <div id="doclist"></div>
+  <div class="lbl" style="margin-top:12px">Readiness check</div>
+  <div class="barwrap"><div class="bar" id="readbar" style="width:0%"></div></div>
+  <div style="font-size:11px;color:#888;margin-bottom:8px" id="barlabel">Upload documents to verify</div>
+  <div id="verdictbox" style="display:none" class="verdict vw"></div>
+  <div class="upload" id="uploadZone">
+    <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none">
+    <div style="font-size:24px;margin-bottom:8px">📄</div>
+    <div style="font-size:13px;color:#666">Drag & drop or <span style="color:#111;cursor:pointer;text-decoration:underline;font-weight:500" onclick="document.getElementById('fileInput').click()">browse files</span></div>
+    <div style="font-size:11px;color:#bbb;margin-top:5px">PDF, JPG, PNG, DOC — AI verifies instantly</div>
+    <div id="uploadedFiles" style="margin-top:12px;text-align:left"></div>
+  </div>
+  <div class="lbl">Step-by-step guide</div>
+  <div class="stepwrap" id="steplist"></div>
+  <div id="s2alert"></div>
+  <div class="divider"></div>
+  <div class="row">
+    <button class="btn" onclick="showTab('procs')">← Back</button>
+    <button class="btn btnp" onclick="goEmail('complaint')">Write email ✉️</button>
+    <button class="btn btn" onclick="goEmail('rights')">Know my rights →</button>
+  </div>
+</div>
+
+<!-- FAQ SCREEN -->
+<div id="scr-faq" class="scr">
+  <div class="hero">Find answers to the most common banking frustrations instantly.</div>
+  <input class="faq-srch" id="faqsrch" placeholder="Search FAQ... e.g. 'card stuck' or 'refund not received'" oninput="filterFaq(this.value)" />
+  <div id="faqlist"></div>
+</div>
+
+<!-- EMAIL SCREEN -->
+<div id="scr-email" class="scr">
+  <div class="hero">Generate a professional bank email in seconds. Fill in your details, choose a template, copy and send.</div>
+
+  <div class="lbl">Choose email type</div>
+  <div class="email-cat" id="emailCats"></div>
+
+  <div class="email-meta">
+    <div class="email-field">
+      <label>Your Full Name</label>
+      <input id="eName" placeholder="Mohammed Al Rashid / Rahul Sharma" oninput="renderEmail()" />
+    </div>
+    <div class="email-field">
+      <label>Account Number</label>
+      <input id="eAcc" placeholder="1234567890" oninput="renderEmail()" />
+    </div>
+  </div>
+  <div class="email-meta">
+    <div class="email-field">
+      <label>Issue Reference / Amount</label>
+      <input id="eRef" placeholder="e.g. AED 2,500 / ₹15,000 / TXN-789" oninput="renderEmail()" />
+    </div>
+    <div class="email-field">
+      <label>Date of Incident</label>
+      <input id="eDate" type="date" oninput="renderEmail()" />
+    </div>
+  </div>
+
+  <div class="lbl" style="margin-top:4px">Email preview</div>
+  <div class="email-preview" id="emailPreview">← Select an email type above to generate your email</div>
+  <div class="row">
+    <button class="copy-btn" id="copyBtn" onclick="copyEmail()">📋 Copy email</button>
+    <span style="font-size:11px;color:var(--color-text-secondary,#888)" id="copyMsg"></span>
+  </div>
+</div>
+
+<script>
+// ═══════════ DATA ═══════════
+const MODE = { current: 'uae' };
+
+const personas = {
+  uae: [
+    {id:'student',ico:'🎓',label:'Student'},
+    {id:'labour',ico:'👷',label:'Worker'},
+    {id:'employee',ico:'💼',label:'Employee'},
+    {id:'business',ico:'🏪',label:'Business'},
+    {id:'family',ico:'👨‍👩‍👧',label:'Family'},
+    {id:'corporate',ico:'🏢',label:'Corporate'},
+  ],
+  india: [
+    {id:'rural',ico:'🌾',label:'Rural/Village'},
+    {id:'labour',ico:'👷',label:'Worker'},
+    {id:'student',ico:'🎓',label:'Student'},
+    {id:'family',ico:'👨‍👩‍👧',label:'Family'},
+    {id:'employee',ico:'💼',label:'Employee'},
+    {id:'business',ico:'🏪',label:'Business'},
+    {id:'corporate',ico:'🏢',label:'Corporate'},
+  ]
+};
+
+const cats = {
+  uae:[
+    {id:'account',ico:'🏦',name:'Accounts',sub:'Open, close, KYC',
+     perSub:{student:'Student account, zero-balance',labour:'Savings account, WPS',employee:'Salary account, KYC',business:'Business account, trade license',family:'Joint account, nominee',corporate:'Corporate account, signatory'}},
+    {id:'transfer',ico:'💸',name:'Transfers',sub:'WPS, remittance, SWIFT',
+     perSub:{student:'Fee payments, home remittance',labour:'Send money home, exchange',employee:'Salary transfer, SWIFT',business:'Vendor payments, LC',family:'Family support, remittance',corporate:'Payroll, bulk transfers'}},
+    {id:'cheque',ico:'📝',name:'Cheques',sub:'PDC, bounce, stop',
+     perSub:{student:'Tuition cheques',labour:'Salary cheque issues',employee:'Rent cheques, PDC',business:'Vendor cheques, bounce',family:'School fee cheques',corporate:'Corporate cheque books'}},
+    {id:'loan',ico:'💰',name:'Loans',sub:'Home, car, SME, gold',
+     perSub:{student:'Education loan',labour:'Personal loan, gold loan',employee:'Home loan, car loan',business:'SME loan, overdraft',family:'Home loan, personal loan',corporate:'Project finance, working capital'}},
+    {id:'deceased',ico:'🕊️',name:'Deceased',sub:'Claim, legal heir, will',
+     perSub:{student:'—',labour:'Family claim process',employee:'DIFC Will, insurance',business:'Business succession',family:'Claim process, nominee',corporate:'Corporate succession'}},
+    {id:'cards',ico:'💳',name:'Cards',sub:'Lost, blocked, replace',
+     perSub:{student:'Student debit card',labour:'Prepaid card, ATM',employee:'Credit card, limits',business:'Business credit card',family:'Supplementary cards',corporate:'Corporate cards, fleet'}},
+    {id:'refund',ico:'🔄',name:'Refunds',sub:'Disputes, wrong transfer',
+     perSub:{student:'Online payment refund',labour:'ATM failed, wrong transfer',employee:'Merchant refund, fraud',business:'Vendor dispute, chargeback',family:'Refund, unauthorized txn',corporate:'Bulk reversal, dispute'}},
+    {id:'business',ico:'🏢',name:'Business',sub:'LC, BG, OD, WPS payroll',
+     perSub:{student:'—',labour:'—',employee:'—',business:'Trade finance, WPS setup',family:'—',corporate:'LC, BG, payroll, treasury'}},
+    {id:'complaint',ico:'⚖️',name:'Complaints',sub:'CBUAE, fraud, ecrime',
+     perSub:{student:'Bank complaint',labour:'Salary complaint, MOHRE',employee:'CBUAE escalation',business:'Regulatory complaint',family:'Consumer protection',corporate:'Regulatory, legal'}},
+    {id:'faq',ico:'❓',name:'FAQ',sub:'Common problems'},
+  ],
+  india:[
+    {id:'account',ico:'🏦',name:'Accounts',sub:'Jan Dhan, KYC, nominee'},
+    {id:'cheque',ico:'📝',name:'Cheques',sub:'Bounce, stop, DD'},
+    {id:'loan',ico:'💰',name:'Loans',sub:'Home, Mudra, Kisan, gold'},
+    {id:'deceased',ico:'🕊️',name:'Deceased',sub:'Nominee, succession cert'},
+    {id:'cards',ico:'💳',name:'Cards',sub:'Lost, blocked, Rupay'},
+    {id:'refund',ico:'🔄',name:'Refunds',sub:'ATM, dispute, UPI fail'},
+    {id:'business',ico:'🏢',name:'Business',sub:'Current a/c, MSME, GST'},
+    {id:'complaint',ico:'⚖️',name:'Complaints',sub:'RBI Ombudsman, RTI'},
+    {id:'schemes',ico:'🌿',name:'Schemes',sub:'Mudra, PMAY, Sukanya'},
+    {id:'faq',ico:'❓',name:'FAQ',sub:'Common problems'},
+  ]
+};
+
+const procs = {
+  uae: {
+    account:[
+      {id:'savings',name:'Open savings account',desc:'New personal bank account in UAE',
+       docs:['Emirates ID (original + copy)','Passport + UAE visa page','Salary certificate (issued within 3 months)','Tenancy contract or utility bill','2 passport photos'],
+       days:'1-3',visits:'1',
+       tip:'Liv, Mashreq Neo, FAB Mobile — open in 10 mins from phone. Zero balance, no branch!',tipType:'as',
+       steps:[{t:'Choose bank',d:'Zero-balance digital: Liv, Mashreq Neo, ADCB Hayyak. Traditional: Emirates NBD, ADCB, FAB'},{t:'Prepare documents',d:'Emirates ID is mandatory. Expired ID = immediate rejection'},{t:'Apply online or visit branch',d:'Digital banks: 10 min app signup. Traditional: 30-60 min at branch'},{t:'KYC verification',d:'Bank verifies identity, visa status and income source'},{t:'Deposit minimum balance',d:'AED 1,000–3,000 depending on bank (digital banks: AED 0)'},{t:'Receive debit card',d:'Delivered in 5-7 working days or instant virtual card for digital banks'}],
+       alert:'Ensure your UAE visa is valid — expired visa means instant rejection.',alertType:'aw'},
+      {id:'kyc',name:'KYC update',desc:'Update bank records with new documents',
+       docs:['Renewed Emirates ID','Passport with updated visa','Updated salary certificate','New tenancy contract if address changed'],
+       days:'1-3',visits:'1',
+       tip:'Many banks accept KYC update via app or video call — no branch visit needed.',tipType:'ai',
+       steps:[{t:'Check what expired',d:'Emirates ID? Visa? Address changed? Identify the update needed'},{t:'Gather updated documents',d:''},{t:'Visit branch or use net banking / app KYC',d:''},{t:'Bank updates records in 1-3 days',d:''},{t:'Confirm via SMS',d:''}],
+       alert:'URGENT: Account freezes if Emirates ID expires and KYC is not updated!',alertType:'ae'},
+      {id:'close',name:'Close bank account',desc:'Close account and withdraw balance',
+       docs:['Emirates ID (original)','Debit card (surrender)','Cheque book (return unused)','Account clearance letter request'],
+       days:'1-7',visits:'1',
+       tip:'Clear ALL liabilities first — outstanding loans, credit cards, PDC cheques. Otherwise bank will refuse closure.',tipType:'aw',
+       steps:[{t:'Clear all dues',d:'Pay off credit card, loans, bounced cheques. Return all cheque books.'},{t:'Transfer remaining balance',d:'Transfer to another account or request bank draft'},{t:'Cancel standing orders and auto-debits',d:'DEWA, Etisalat, Du, Salik — update all auto-payments first'},{t:'Visit branch with Emirates ID',d:'Fill account closure form'},{t:'Surrender debit card and cheque book',d:'Bank destroys them on spot'},{t:'Get account closure letter',d:'VERY IMPORTANT — keep this as proof. Some banks issue after 30 days.'}],
+       alert:'Get the CLOSURE LETTER. Without it, hidden charges can accumulate on a "closed" account.',alertType:'ae'},
+      {id:'joint',name:'Open joint account',desc:'Shared account with spouse or partner',
+       docs:['Both holders Emirates ID','Both passports + visa','Salary certificate of primary holder','Tenancy contract','Joint account application form'],
+       days:'2-5',visits:'1',
+       tip:'Joint accounts in UAE can be "Either or Survivor" (both can operate) or "Jointly" (both signatures needed).',tipType:'ai',
+       steps:[{t:'Choose account type',d:'"Either or Survivor" = either can operate alone. "Jointly" = both must sign every transaction.'},{t:'Both holders visit branch together',d:'Both must be present with original documents'},{t:'Fill joint account application',d:''},{t:'Bank verifies both holders',d:''},{t:'Account opened in 2-5 days',d:''},{t:'Both receive debit cards',d:''}],
+       alert:'Choose "Either or Survivor" — if one holder passes away, the other can access funds immediately.',alertType:'ai'},
+    ],
+    deceased:[
+      {id:'dec-will',name:'Claim with DIFC Will (non-Muslim)',desc:'Fastest path — register will while alive',
+       docs:['DIFC registered Will (difcwills.com)','Death certificate (attested by MOFA)','Your Emirates ID + passport','Proof of relationship'],
+       days:'15-30',visits:'2',
+       tip:'NON-MUSLIMS: Register a DIFC Will NOW while alive. Saves family 3-6 months of court process.',tipType:'as',
+       steps:[{t:'Get death certificate',d:'From hospital then attested at Ministry of Foreign Affairs'},{t:'Locate DIFC Will registration',d:'Check difcwills.com with deceased\'s details'},{t:'Visit DIFC Courts',d:'Much faster process with registered Will'},{t:'Submit documents to bank',d:''},{t:'Funds released to named beneficiaries',d:'Usually 15-30 days'}],
+       alert:'Without a DIFC Will, expat assets in UAE follow UAE law — NOT home country law.',alertType:'ae'},
+      {id:'dec-no-will',name:'Claim without Will (full probate)',desc:'6 month+ legal process without Will',
+       docs:['Death certificate (MOFA attested)','Passport of deceased','All heirs Emirates ID + passport','Court succession order','Sharia certificate (if Muslim)','Indemnity bond from bank'],
+       days:'60-180',visits:'6+',
+       tip:'This is why registering a Will is so important. Without it, family waits months.',tipType:'aw',
+       steps:[{t:'Get death certificate and attest with MOFA',d:''},{t:'Apply to relevant court (Dubai Courts / Abu Dhabi Courts)',d:''},{t:'Sharia court for Muslim inheritance distribution',d:''},{t:'Obtain court succession order — can take 2-6 months',d:''},{t:'Present succession order to bank',d:''},{t:'Bank releases funds as per court order',d:''}],
+       alert:'URGENT: Freeze all accounts immediately after death. Call bank hotline same day.',alertType:'ae'},
+    ],
+    refund:[
+      {id:'merch-refund',name:'Merchant refund not received',desc:'Paid but money not returned',
+       docs:['Transaction reference number','Merchant refund receipt / email','Bank statement showing original charge'],
+       days:'5-10',visits:'0',
+       tip:'File dispute with bank AND email merchant simultaneously for faster resolution.',tipType:'ai',
+       steps:[{t:'Check merchant refund timeline',d:'Most merchants take 5-7 business days. Check your email for refund confirmation.'},{t:'If >10 days: contact merchant',d:'Email or call merchant with order number and payment proof'},{t:'Still no refund? File dispute with bank',d:'Call bank or submit dispute online. Bank initiates chargeback.'},{t:'Bank investigates',d:'Takes 10-15 working days'},{t:'If resolved in your favour: refund credited',d:''},{t:'If not resolved: escalate to CBUAE',d:'consumerprotection.centralbank.ae'}],
+       alert:'Keep ALL proof: receipts, emails, screenshots. Bank needs these for chargeback.',alertType:'ai'},
+      {id:'unauth-txn',name:'Unauthorized transaction',desc:'Money taken without your permission',
+       docs:['Bank statement','Transaction details','Police report (for large amounts)','Your Emirates ID'],
+       days:'5-30',visits:'1',
+       tip:'EVERY MINUTE COUNTS. Call bank hotline immediately — fraud recovery depends on speed.',tipType:'ae',
+       steps:[{t:'CALL BANK HOTLINE RIGHT NOW',d:'Emirates NBD: 600 54 0000 | ADCB: 600 50 2030 | FAB: 600 52 5500'},{t:'Block your card immediately',d:'Via hotline or bank app — takes 30 seconds'},{t:'File cybercrime report',d:'ecrime.ae — UAE cybercrime portal. Fast and effective.'},{t:'Visit branch and file written dispute',d:'Same day if possible'},{t:'Bank investigates and provisionally refunds',d:'Usually within 5-7 days for confirmed fraud'},{t:'If bank refuses: escalate to CBUAE',d:''}],
+       alert:'ACT IN MINUTES — the faster you report, the higher chance of full recovery.',alertType:'ae'},
+      {id:'atm-fail',name:'ATM cash not dispensed',desc:'Money debited but no cash received',
+       docs:['ATM slip (if printed)','Bank statement','Bank name and ATM location','Time and date of transaction'],
+       days:'1-5',visits:'0',
+       tip:'UAE banks must reverse ATM failures within 2-5 working days automatically.',tipType:'ai',
+       steps:[{t:'Do NOT leave ATM immediately',d:'Press cancel, take any receipt printed'},{t:'Note ATM details',d:'Bank name, location, exact time'},{t:'Call bank hotline same day',d:'Report with transaction details'},{t:'Bank checks ATM cash log',d:'ATMs are counted daily — discrepancy is verified'},{t:'Reversal within 2-5 working days',d:''},{t:'If not reversed: file CBUAE complaint',d:'This is a clear-cut case — banks must comply'}],
+       alert:'If ATM is not your own bank, call BOTH banks — yours and the ATM\'s bank.',alertType:'aw'},
+    ],
+    complaint:[
+      {id:'cbuae',name:'CBUAE consumer complaint',desc:'Escalate when bank fails to resolve',
+       docs:['Original complaint to bank (copy)','Bank response or proof of 30-day wait','All supporting documents','Emirates ID'],
+       days:'30-60',visits:'0',
+       tip:'CBUAE complaints are FREE. Banks must respond within 30 days by law.',tipType:'as',
+       steps:[{t:'File complaint with bank first',d:'In writing. Keep copy. Bank has 30 days to respond.'},{t:'No resolution after 30 days? Go to CBUAE',d:'consumerprotection.centralbank.ae'},{t:'Submit complaint online with all documents',d:''},{t:'CBUAE contacts bank and mediates',d:''},{t:'Decision issued — legally binding on bank',d:''}],
+       alert:'Banks take CBUAE complaints very seriously. Most issues resolve at this stage.',alertType:'as'},
+    ],
+    wps:[
+      {id:'wps-issue',name:'WPS salary not received',desc:'Employer has not paid via WPS',
+       docs:['Employment contract','Last payslip','Emirates ID','MOHRE app screenshot'],
+       days:'2-10',visits:'0',
+       tip:'Download MOHRE UAE app — check WPS status in real time every payday.',tipType:'as',
+       steps:[{t:'Check MOHRE app for WPS status',d:'Download "MOHRE UAE" from App Store / Play Store'},{t:'Wait 48 hours from due date',d:''},{t:'Still not paid? Call MOHRE: 800-60',d:'Free hotline, available 24/7'},{t:'File complaint on mohre.gov.ae',d:'Online complaint form — very fast process'},{t:'MOHRE contacts employer immediately',d:'Employer must pay within 48 hours or face fines + blacklisting'},{t:'Employer absconded?',d:'Apply for MOHRE welfare assistance and legal aid'}],
+       alert:'WPS non-payment is a CRIMINAL violation in UAE. You have full legal protection.',alertType:'as'},
+    ],
+    cards:[
+      {id:'lost-card',name:'Lost or stolen card',desc:'Block and replace immediately',
+       docs:['Emirates ID','Police report (if stolen)'],
+       days:'5-7',visits:'0',
+       tip:'Block via bank app IMMEDIATELY. Every second counts with a stolen card.',tipType:'ae',
+       steps:[{t:'Block card via bank app or hotline',d:'Do this FIRST — takes 30 seconds'},{t:'Report to police if stolen',d:'ecrime.ae or nearest police station'},{t:'Request replacement card',d:'Via app or hotline — no branch visit needed'},{t:'New card arrives in 5-7 days',d:'Or get instant virtual card in app'},{t:'Update auto-debits with new card number',d:'DEWA, Salik, subscriptions'}],
+       alert:'Block card FIRST, then report. A stolen card can be drained in minutes.',alertType:'ae'},
+      {id:'card-limit',name:'Increase card limit',desc:'Request higher credit or spending limit',
+       docs:['Latest salary certificate','Bank statement (3 months)','Emirates ID'],
+       days:'2-5',visits:'0',
+       tip:'Banks usually approve if your salary has increased. Call before visiting branch.',tipType:'ai',
+       steps:[{t:'Check current limit in bank app',d:''},{t:'Call bank or apply via app',d:'Most banks allow limit increase requests online'},{t:'Submit salary certificate if needed',d:''},{t:'Bank reviews and responds in 2-5 days',d:''},{t:'New limit reflected on card',d:''}],
+       alert:'Higher limit = higher risk. Only increase if you need it.',alertType:'aw'},
+    ],
+    loan:[
+      {id:'personal-loan',name:'Personal loan application',desc:'Unsecured loan for personal needs',
+       docs:['Emirates ID + passport','Salary certificate','Bank statement (3-6 months)','Employment contract','AECB credit report'],
+       days:'3-10',visits:'1',
+       tip:'Compare rates across banks. Digital banks like Mashreq Neo often have lower rates and instant approval.',tipType:'ai',
+       steps:[{t:'Check AECB score first',d:'aecb.gov.ae — score above 700 needed for best rates'},{t:'Compare banks',d:'Emirates NBD, ADCB, FAB, Mashreq — check rates, fees, and prepayment charges'},{t:'Apply online or visit branch',d:'Many banks offer instant pre-approval online'},{t:'Submit documents',d:'Salary certificate, bank statement, Emirates ID'},{t:'Bank processes in 3-10 days',d:''},{t:'Loan disbursed to your account',d:''}],
+       alert:'Check prepayment penalty before signing. Some banks charge 1-3% for early repayment.',alertType:'aw'},
+      {id:'home-loan',name:'Home loan / mortgage',desc:'Property purchase financing',
+       docs:['Emirates ID + passport','Salary certificate','Bank statement (6 months)','Property valuation','Sale agreement (MOU)','Down payment proof (20-25%)'],
+       days:'15-30',visits:'3+',
+       tip:'UAE requires minimum 20% down payment for first property, 25% for investment. Non-residents: 50%.',tipType:'ai',
+       steps:[{t:'Check eligibility',d:'Minimum salary AED 10,000-15,000. AECB score 700+.'},{t:'Get pre-approval',d:'Apply to 2-3 banks for best rate comparison'},{t:'Find property and sign MOU',d:'Make sure property is mortgage-eligible'},{t:'Bank valuates property',d:'Valuation fee: AED 2,500-3,500'},{t:'Final approval and offer letter',d:''},{t:'Sign mortgage and transfer at DLD',d:'4% DLD fee + registration charges'}],
+       alert:'Budget for: 4% DLD fee + 2% agent + 1% bank processing + valuation = ~7-8% on top of price.',alertType:'aw'},
+    ],
+    transfer:[
+      {id:'intl-remit',name:'International remittance',desc:'Send money to home country',
+       docs:['Emirates ID','Beneficiary bank details (IBAN/SWIFT)','Purpose of transfer'],
+       days:'0-2',visits:'0',
+       tip:'Exchange houses (Al Ansari, Lulu) are ALWAYS cheaper than banks for remittance.',tipType:'as',
+       steps:[{t:'Compare rates',d:'Exchange houses: AED 10-30 flat. Banks: 1-3% of amount.'},{t:'Choose provider',d:'Al Ansari, Lulu Exchange apps — no branch visit needed'},{t:'Enter beneficiary details',d:'IBAN for GCC, SWIFT/account for international'},{t:'Confirm rate and fees',d:''},{t:'Transfer processed same-day or next-day',d:''},{t:'Beneficiary receives funds',d:'India/Pakistan/Philippines: usually same day'}],
+       alert:'For large amounts (>AED 50,000): consider bank SWIFT for security. For regular smaller amounts: exchange house.',alertType:'ai'},
+    ],
+    cheque:[
+      {id:'chq-bounce',name:'Cheque bounced',desc:'Your cheque returned unpaid',
+       docs:['Cheque return memo','Bank statement','Emirates ID'],
+       days:'1-3',visits:'1',
+       tip:'CRIMINAL offense in UAE. Act IMMEDIATELY — settle before case is filed.',tipType:'ae',
+       steps:[{t:'Contact the recipient immediately',d:'Call them and commit to paying'},{t:'Deposit funds and re-present cheque',d:'Ask recipient to deposit again once funds are available'},{t:'Or pay by bank transfer',d:'Transfer exact amount + any bounce charges'},{t:'Get written confirmation of settlement',d:'VERY important — protects you legally'},{t:'If police case filed: contact lawyer',d:'Travel ban can be issued within 24 hours'}],
+       alert:'UAE takes bounced cheques very seriously. Criminal charges, travel ban, and jail time are possible.',alertType:'ae'},
+      {id:'stop-chq',name:'Stop payment on cheque',desc:'Cancel a cheque before it is cashed',
+       docs:['Emirates ID','Cheque number','Account number'],
+       days:'0',visits:'0',
+       tip:'Stop payment works only BEFORE the cheque is presented. After presentation, it cannot be stopped.',tipType:'aw',
+       steps:[{t:'Call bank hotline immediately',d:'Give cheque number, amount, and payee name'},{t:'Or stop via net banking',d:'Cheque services → Stop payment'},{t:'Bank charges AED 25-50 per cheque',d:''},{t:'Confirm stop payment in writing',d:'Follow up at branch if needed'}],
+       alert:'Stopping a valid cheque without cause can have legal consequences. Use only for genuine reasons.',alertType:'aw'},
+    ],
+  },
+  india: {
+    account:[
+      {id:'jandhan',name:'Jan Dhan account opening',desc:'Zero balance account — FREE for all',
+       docs:['Aadhaar Card','Passport photo (1)','Self-declaration if no other ID'],
+       days:'0',visits:'1',
+       tip:'Jan Dhan = zero balance, free Rupay card, ₹2 lakh accident insurance, ₹30,000 overdraft facility — ALL FREE!',tipType:'as',
+       steps:[{t:'Visit any bank branch or post office',d:'All government banks, most private banks offer Jan Dhan'},{t:'Fill account opening form',d:'Bank staff will help — it is simple'},{t:'Submit Aadhaar (mandatory)',d:'Or self-declaration if no documents at all'},{t:'Get passbook immediately',d:''},{t:'Free Rupay debit card in 7-10 days',d:''},{t:'Activate ₹2 lakh accident insurance',d:'Automatic — linked to Rupay card'}],
+       alert:'Jan Dhan is FREE. No minimum balance ever. Every Indian should have one.',alertType:'as'},
+      {id:'nominee',name:'Add or update nominee',desc:'Critical — protects family after death',
+       docs:['Passbook','Nominee Aadhaar','Nominee photo','Form DA-1 (bank provides)'],
+       days:'1',visits:'1',
+       tip:'Adding nominee takes 10 minutes. Without it, family may struggle for months to claim money after death.',tipType:'aw',
+       steps:[{t:'Visit branch with passbook and nominee Aadhaar',d:''},{t:'Fill Form DA-1',d:'Bank provides this form free'},{t:'Submit nominee photo and ID',d:''},{t:'Get nomination certificate',d:'Keep it safe with your passbook'},{t:'Done in same day',d:''}],
+       alert:'ALWAYS add a nominee. Without nominee, family needs court order to claim your money.',alertType:'ae'},
+    ],
+    deceased:[
+      {id:'dec-nominee',name:'Claim money — Nominee exists',desc:'Simple and fast — 7-15 days',
+       docs:['Death certificate (from municipality / panchayat)','Nominee Aadhaar + PAN','Nominee photo','Claim form DA-2 (bank provides)','Passbook of deceased'],
+       days:'7-15',visits:'1-2',
+       tip:'With nominee: YOU DO NOT NEED A LAWYER. Process is simple and fast.',tipType:'as',
+       steps:[{t:'Get death certificate',d:'From municipal corporation / gram panchayat. Usually takes 1-3 days.'},{t:'Go to bank with nominee documents',d:''},{t:'Fill claim form DA-2',d:'Bank provides this — fill carefully'},{t:'Bank verifies documents',d:'7-15 day processing time'},{t:'Money transferred to nominee account',d:''}],
+       alert:'With nominee registered, this is simple. The tragedy is when no nominee was added.',alertType:'as'},
+      {id:'dec-no-nominee',name:'Claim money — No nominee',desc:'Longer legal process — 30-90 days',
+       docs:['Death certificate','Legal Heir Certificate (from tehsil/SDM office)','Succession Certificate (civil court) for >₹50,000','All heirs Aadhaar + PAN','Indemnity bond (bank provides)','NOC from other heirs'],
+       days:'30-90',visits:'4-6',
+       tip:'This painful process is exactly WHY every account must have a nominee.',tipType:'aw',
+       steps:[{t:'Get death certificate from municipality or panchayat',d:''},{t:'Apply for Legal Heir Certificate at tehsil/SDM office',d:'Takes 1-4 weeks'},{t:'For amounts above ₹50,000: get Succession Certificate from civil court',d:'File application with court fee'},{t:'All legal heirs sign indemnity bond at bank',d:'Bank provides this'},{t:'Submit all documents to bank',d:''},{t:'Bank legal team reviews — 15-30 days',d:''},{t:'Amount released to heirs',d:''}],
+       alert:'This is why NOMINATION matters. One 10-minute form saves family months of suffering.',alertType:'ae'},
+    ],
+    refund:[
+      {id:'atm-fail',name:'ATM cash not dispensed',desc:'Money debited but no cash received',
+       docs:['ATM receipt (if printed)','Bank statement','ATM location, time, date'],
+       days:'1-5',visits:'0',
+       tip:'RBI mandates auto-reversal within T+5 working days. If not done — escalate to RBI Ombudsman.',tipType:'ai',
+       steps:[{t:'Note ATM details immediately',d:'Bank name, location, exact time, amount'},{t:'Call bank helpline same day',d:'1800 numbers are free. Report with details.'},{t:'Bank checks ATM cash log',d:'Every ATM is counted daily. Discrepancy is confirmed quickly.'},{t:'Reversal within T+5 working days',d:'This is RBI mandate — bank must comply'},{t:'If not reversed by day 5: file RBI Ombudsman complaint',d:'bankingombudsman.rbi.org.in — powerful and free'}],
+       alert:'RBI RULE: If not reversed within 5 days, bank must pay ₹100/day penalty to you.',alertType:'as'},
+      {id:'unauth-upi',name:'Unauthorized UPI/online transaction',desc:'Money taken without your permission',
+       docs:['Transaction reference','Bank statement','Screenshots of transaction','FIR copy for large amounts'],
+       days:'3-30',visits:'1',
+       tip:'RBI rule: Report within 3 days = ZERO liability. Report in 4-7 days = limited liability. After 7 days = full loss.',tipType:'ae',
+       steps:[{t:'IMMEDIATELY call bank helpline: 1930',d:'Cyber fraud national helpline — works 24/7'},{t:'Block your card and UPI via bank app',d:'Takes 30 seconds'},{t:'File cybercrime complaint',d:'cybercrime.gov.in — national cybercrime portal'},{t:'File FIR at nearest police station',d:'Get FIR copy — important for bank claim'},{t:'Submit written dispute to bank',d:'Must be within 3 days for zero liability per RBI'},{t:'Bank investigates and refunds',d:'Usually 5-10 working days for confirmed fraud'},{t:'If not refunded: RBI Ombudsman',d:''}],
+       alert:'CALL 1930 IMMEDIATELY. Every minute matters. Money recovery depends on speed.',alertType:'ae'},
+    ],
+    complaint:[
+      {id:'rbi-ombudsman',name:'RBI Banking Ombudsman complaint',desc:'Escalate when bank doesn\'t resolve',
+       docs:['Original complaint to bank (copy)','Bank response or 30-day wait proof','All supporting documents','Aadhaar/PAN'],
+       days:'30-60',visits:'0',
+       tip:'RBI Ombudsman is FREE. Banks are legally required to respond. Very effective.',tipType:'as',
+       steps:[{t:'File written complaint with bank first',d:'Keep copy. Bank has 30 days to resolve.'},{t:'No resolution? Go to RBI Ombudsman',d:'bankingombudsman.rbi.org.in — file online'},{t:'Submit all documents and complaint history',d:''},{t:'Ombudsman contacts bank — bank must respond in 21 days',d:''},{t:'Award issued if bank is at fault — legally binding',d:''},{t:'Bank penalized if award not followed',d:''}],
+       alert:'RBI Ombudsman awards are legally binding. Banks cannot ignore them.',alertType:'as'},
+    ],
+    schemes:[
+      {id:'mudra',name:'Mudra Loan',desc:'Small business loan — NO collateral',
+       docs:['Aadhaar + PAN','Business proof / plan','Bank statement','Income proof'],
+       days:'7-15',visits:'2',
+       tip:'Mudra loan: Up to ₹10 lakh, NO collateral, low interest. Every small business should know this!',tipType:'as',
+       steps:[{t:'Choose tier: Shishu (up to ₹50,000) / Kishore (up to ₹5 lakh) / Tarun (up to ₹10 lakh)',d:''},{t:'Visit any bank or apply at udyamimitra.in',d:''},{t:'Submit business plan and documents',d:''},{t:'Bank evaluates — no collateral needed',d:''},{t:'Loan sanctioned and Mudra card issued',d:''}],
+       alert:'Mudra loans have NO collateral and low interest. Perfect for first-time business owners.',alertType:'as'},
+    ],
+  }
+};
+
+const faqs = {
+  uae:[
+    {q:'Why is my debit card stuck at delivery?',cat:'Cards',
+     a:'This is one of the most common frustrations. Here\'s what to do:',
+     steps:['Check tracking — bank sends SMS with courier tracking number (usually Aramex, Fetchr, or Zajel)','Log in to bank app → Cards section → Track card delivery','If tracking shows "failed delivery": courier needs to reattempt. Call courier directly.','No tracking update for 7+ days? Call bank hotline and request card reprint','Still no card after 10 days? Go to branch with Emirates ID and request same-day issuance at counter','Alternative: Enable virtual card on bank app for immediate use while waiting'],
+     email:'card-delivery'},
+    {q:'Why was my transaction declined even though I have balance?',cat:'Cards',
+     a:'10 reasons why transactions fail (even with balance):',
+     steps:['Daily transaction limit exceeded — check your app for limit','Card not enabled for online/international payments — enable in app','Card verification failed — wrong CVV entered','Bank fraud system flagged the merchant — call bank to whitelist','Card expired — check expiry date on card','Account has a hold or flag — call bank helpline','Merchant payment gateway issue — try another payment method','International transaction not enabled — enable in bank app','3D Secure / OTP not verified in time','Bank system downtime — try again in 10 minutes'],
+     email:''},
+    {q:'My WPS salary was not credited — what do I do?',cat:'WPS',
+     a:'UAE employers MUST pay via WPS. This is a legal obligation. Here\'s the process:',
+     steps:['Download MOHRE UAE app — check WPS payment status instantly','Wait 48 hours from your expected payday','Still not paid? Call MOHRE hotline: 800-60 (free, 24/7)','File online complaint at mohre.gov.ae — takes 5 minutes','MOHRE contacts employer — employer must pay within 48 hours or get fined','Employer refuses or has absconded? Apply for MOHRE welfare assistance','MOHRE provides legal aid and can initiate labour court case for you'],
+     email:'wps'},
+    {q:'I sent money to the wrong account — can I get it back?',cat:'Transfers',
+     a:'Act within 2 hours for best chance of recovery:',
+     steps:['Call bank hotline IMMEDIATELY — time is critical','Give exact transaction details: amount, time, wrong account number','Bank places a "recall" request to receiving bank','If receiver agrees: refund in 3-5 days','If receiver refuses: bank provides legal affidavit process — takes 2-4 weeks','File complaint with CBUAE if bank is uncooperative','For large amounts: consider police complaint and civil court'],
+     email:'wrong-transfer'},
+    {q:'My refund from a merchant has not arrived',cat:'Refunds',
+     a:'Merchant refunds in UAE take 5-14 days. Here is what to do:',
+     steps:['Check email for merchant refund confirmation — they send a reference number','Refunds to UAE cards take 5-7 business days to appear','After 10 business days: contact merchant with reference number and payment proof','Merchant says refund was processed but money not showing? Request MERCHANT\'S reference ID','Give this reference ID to your bank — they can trace it','Still unresolved after 15 days? File card dispute / chargeback with your bank','Bank initiates chargeback with merchant\'s bank — 10-15 working days to resolve'],
+     email:'refund'},
+    {q:'My account has been frozen — why and what do I do?',cat:'Account',
+     a:'5 most common reasons an account is frozen in UAE:',
+     steps:['Emirates ID expired — most common reason. Renew at ICP immediately.','KYC not updated — bank needs fresh documents annually','Suspected fraudulent activity — call bank to clarify','Regulatory / AML hold — compliance review. Call bank compliance team.','Court order — you may have a legal case against you. Get legal advice.','HOW TO UNFREEZE: Call bank hotline → Visit branch with Emirates ID → Submit required documents → Usually resolved in 1-3 working days'],
+     email:'frozen'},
+    {q:'A cheque I issued bounced — what happens now?',cat:'Cheques',
+     a:'Bounced cheques are CRIMINAL in UAE — act immediately:',
+     steps:['CALL THE PERSON / COMPANY who received the cheque RIGHT NOW','Agree to pay the amount immediately — this is the fastest solution','If you pay before they file a case: usually no legal action taken','Case filed? You can still settle — courts encourage this','If taken to court: possible travel ban within 24 hours of case filing','Conviction can mean: up to 3 years jail + fine equal to cheque amount','Prevention: NEVER issue cheque without 100% confirmed balance on that exact date'],
+     email:'bounce'},
+    {q:'How do I send money home cheaply from UAE?',cat:'Remittance',
+     a:'Exchange houses are ALWAYS cheaper than banks. Here is the comparison:',
+     steps:['BEST OPTION: Al Ansari Exchange, Lulu Exchange, Al Fardan Exchange','Exchange house fees: AED 10-30 flat. Bank fees: 1-3% of amount.','On AED 5,000 transfer: Exchange house = AED 25. Bank = AED 75-150.','Exchange house rates are also 0.5-1% better than bank rates','Same-day to India, Pakistan, Philippines, Bangladesh, Sri Lanka, Nepal','Online transfer: Al Ansari app, LuLu Money app — no branch visit','For amounts over AED 50,000: SWIFT via bank is more reliable'],
+     email:''},
+    {q:'What is AECB credit score and why does it matter?',cat:'Loans',
+     a:'AECB = Al Etihad Credit Bureau. It is UAE\'s credit scoring system:',
+     steps:['Score range: 300-900. Good score = 700+. Excellent = 800+','Every loan, credit card, and missed payment affects your AECB score','Low score = loan rejection or higher interest rate','Get your free AECB report: aecb.gov.ae (once per year free)','How to improve score: Pay all EMIs on time. Clear credit card in full monthly.','Dispute wrong entries: Contact AECB directly with proof','Building score from zero: Start with small credit card, use it, pay fully every month'],
+     email:''},
+    {q:'Do I need a DIFC Will if I am an expat in UAE?',cat:'Legal',
+     a:'YES — extremely important for all non-Muslim expats:',
+     steps:['Without a Will: UAE Sharia law applies to your UAE assets when you die','This means assets may NOT go to who you want (spouse, children, partner)','DIFC Will: Register at difcwills.com — legally recognized in UAE courts','Cost: AED 900-2,500 depending on Will type','With DIFC Will: Estate settled in 15-30 days instead of 3-6 months','Without DIFC Will: Family may need to go to court for 3-6 months','DO THIS TODAY — it is the single most important banking/legal step for UAE expats'],
+     email:''},
+  ],
+  india:[
+    {q:'Why is my card stuck at delivery?',cat:'Cards',
+     a:'Very common problem. Here is what to do step by step:',
+     steps:['Check SMS from bank — they send tracking link (usually BlueDart, DTDC, Speed Post)','Check bank app → Cards → Track delivery status','Tracking shows "failed delivery"? Courier will attempt again — wait 24 hours','No update for 7+ days? Call bank helpline (1800 number — free)','Request card reprint — bank will resend. Takes 5-7 more days.','Ask for immediate card at branch — some banks issue at branch with Emirates ID','Enable virtual card on bank app for online use while you wait','Tip: Write your full name on door or inform security/guard about card delivery'],
+     email:'card-delivery'},
+    {q:'My ATM swallowed my card — what do I do?',cat:'Cards',
+     a:'Stay calm. This is solved quickly:',
+     steps:['Do NOT leave the ATM — press the intercom/help button if available','Note: bank name, ATM location (address), exact time','Call bank helpline immediately — tell them ATM location and time','Bank will retrieve card from ATM during maintenance (usually same day or next day)','You can collect card from branch OR request new card','If foreign bank ATM: call that bank AND your own bank','Card is safe inside ATM — nobody else can use it'],
+     email:''},
+    {q:'I got cheated online — money debited from account',cat:'Fraud',
+     a:'ACT IN THE FIRST 3 HOURS FOR BEST RECOVERY:',
+     steps:['CALL 1930 IMMEDIATELY — National Cyber Crime Helpline. Works 24/7.','Block your card and UPI via bank app — takes 30 seconds','File complaint at cybercrime.gov.in — national cybercrime portal','Go to nearest police station — file FIR, get FIR copy','Call your bank helpline — report unauthorized transaction','Submit written dispute to bank within 3 days — RBI zero liability rule applies','Bank investigates within 10 working days and refunds if fraud confirmed'],
+     email:'fraud'},
+    {q:'My UPI payment failed but money was deducted',cat:'UPI/Digital',
+     a:'This usually reverses automatically. Here is what to do:',
+     steps:['Wait 1 hour — most UPI failures auto-reverse within 1 hour','Check bank statement after 1 hour — money usually back','Still not reversed after 4 hours? Check NPCI Dispute Portal: npci.org.in','Call bank helpline — give UPI transaction ID (starts with UTR)','File dispute in your UPI app (PhonePe / GPay / Paytm → Help → Raise dispute)','Bank must resolve within 5 working days as per NPCI rules','If not resolved: file RBI Ombudsman complaint online'],
+     email:'upi-fail'},
+    {q:'My loan application was rejected — what do I do?',cat:'Loans',
+     a:'7 most common reasons for rejection and how to fix each:',
+     steps:['Low CIBIL score (below 650): Get free report at cibil.com. Pay all dues. Wait 6 months.','High existing EMIs: Total EMIs cannot exceed 50-60% of income. Prepay some loans.','Insufficient income: Apply for smaller amount. Add co-applicant.','Job instability: Banks prefer 2+ years at same employer. Wait if recently changed jobs.','Wrong documents: Check EXACT document list. Even one wrong document = rejection.','Aadhaar-PAN mismatch: Fix name consistency first at incometax.gov.in','Too many loan inquiries: Multiple applications lower CIBIL. Apply at ONE bank at a time.'],
+     email:'loan-reject'},
+    {q:'Bank charged me extra fees I did not agree to',cat:'Complaints',
+     a:'You have rights. Here is how to get money back:',
+     steps:['Check your account agreement — what fees were disclosed?','If fee was NOT in agreement: bank must refund it','Call bank helpline and ask for fee reversal — often done immediately','Refused? Visit branch and speak to manager. Put request in writing.','Still refused? Email bank\'s grievance officer (email on bank website)','No response in 30 days? File RBI Ombudsman complaint — free and powerful','RBI Ombudsman awards up to ₹20 lakh compensation including mental harassment'],
+     email:'fee-dispute'},
+    {q:'What is the Mudra Loan and how do I get it?',cat:'Schemes',
+     a:'Mudra is the best loan for small businesses — no collateral needed:',
+     steps:['Mudra Pradhan Mantri Mudra Yojana — Government of India scheme','Three types: Shishu (up to ₹50,000) / Kishore (₹50,000-5 lakh) / Tarun (₹5-10 lakh)','NO collateral required for any Mudra loan — even ₹10 lakh','Interest rate: 10-12% — much lower than personal loans','Who can apply: Street vendors, small shops, artisans, farmers, women entrepreneurs','Apply at: Any bank, NBFC, or online at udyamimitra.in','Documents: Aadhaar + PAN + business proof + photo + bank statement'],
+     email:''},
+    {q:'My nominee was not added — my father passed away. What do I do?',cat:'Deceased',
+     a:'I understand this is a very difficult time. Here is the process, step by step:',
+     steps:['First, take a breath. This process takes time but you WILL get the money.','Get death certificate from municipal corporation or gram panchayat — 1-3 days','Apply for Legal Heir Certificate at tehsil/SDM office — takes 2-4 weeks','For amounts above ₹50,000: also need Succession Certificate from civil court','All legal heirs must agree and sign — if any heir disputes, court decides','Submit all documents to bank — bank\'s legal team reviews in 15-30 days','Contact a free legal aid centre if you need help with court process'],
+     email:'deceased'},
+  ]
+};
+
+const emailTemplates = {
+  uae:{
+    'card-delivery':{
+      subject:'Urgent: Debit Card Not Delivered — Account [ACC]',
+      body:`Dear Customer Service Team,
+
+I am writing to report that my debit card has not been delivered despite [DAYS] days having passed since my account was opened / card was requested.
+
+Account Details:
+- Account Holder: [NAME]
+- Account Number: [ACC]
+- Card Request Date: [DATE]
+- Reference Number: [REF]
+
+I have tracked the shipment and there has been no update since [DATE]. Despite waiting the standard 7-10 working days, the card has not arrived at my registered address.
+
+I kindly request:
+1. Immediate investigation into the status of my card delivery
+2. If lost in transit: reissue of the card with express delivery
+3. Alternatively: issuance of a replacement card at my nearest branch
+
+I expect a response within 5 working days as per CBUAE Consumer Protection regulations.
+
+Yours faithfully,
+[NAME]
+Emirates ID: [REF]
+Mobile: [Your mobile number]`
+    },
+    'refund':{
+      subject:'Dispute: Merchant Refund Not Received — Ref [REF]',
+      body:`Dear Disputes Team,
+
+I am writing to formally dispute a transaction where a merchant refund has not been credited to my account.
+
+Account Details:
+- Account Holder: [NAME]
+- Account Number: [ACC]
+- Original Transaction Date: [DATE]
+- Transaction Amount: [REF]
+- Merchant Name: [Merchant name]
+- Merchant Refund Reference: [If available]
+
+The merchant confirmed a refund on [DATE] however the amount has not appeared in my account despite [DAYS] business days having passed. The standard refund window of 5-7 business days has been exceeded.
+
+I request:
+1. Immediate investigation into the missing refund
+2. Provisional credit to my account during investigation
+3. Written confirmation of the dispute outcome
+
+If this matter is not resolved within 10 working days, I will escalate to the Central Bank of the UAE (CBUAE) Consumer Protection department.
+
+Yours faithfully,
+[NAME]
+Account: [ACC]`
+    },
+    'wps':{
+      subject:'Urgent: WPS Salary Non-Payment — [NAME] — [DATE]',
+      body:`To Whom It May Concern,
+
+I am writing to formally report a violation of the UAE Wage Protection System (WPS) regulations.
+
+Employee Details:
+- Employee Name: [NAME]
+- Account Number: [ACC]
+- Employer Name: [Employer name]
+- Expected Salary Payment Date: [DATE]
+- Amount Due: [REF]
+
+As of today's date, my salary for the period ending [DATE] has not been credited to my account via the WPS system. This constitutes a violation of UAE Labour Law and MOHRE WPS regulations.
+
+I have attempted to contact my employer on [DATE] without resolution.
+
+I formally request:
+1. Immediate investigation by MOHRE into this WPS violation
+2. Employer to be contacted and directed to process salary payment within 48 hours
+3. Appropriate penalties applied if employer fails to comply
+
+I have also filed a complaint on the MOHRE portal (Reference: [REF]).
+
+Yours faithfully,
+[NAME]
+Emirates ID: [REF]`
+    },
+    'wrong-transfer':{
+      subject:'URGENT: Incorrect Fund Transfer — Immediate Recall Required',
+      body:`Dear Sir/Madam,
+
+I am writing with extreme urgency to request an immediate fund recall for a transfer made in error.
+
+Account Details:
+- Account Holder: [NAME]
+- Account Number: [ACC]
+- Date of Transfer: [DATE]
+- Amount Transferred: [REF]
+- Intended Recipient: [Correct name]
+- Actual Recipient (incorrect): [Wrong account number entered]
+
+This transfer was made inadvertently to the wrong account number. I request the bank to initiate an immediate fund recall / reversal as per Central Bank of UAE guidelines.
+
+I understand that time is critical in such cases and request:
+1. Immediate freeze on the recipient account if possible
+2. Initiation of recall request to the receiving bank
+3. Update within 24 hours on the status of this recall
+
+I accept full responsibility for the incorrect entry and request urgent assistance.
+
+Yours faithfully,
+[NAME]
+Account: [ACC]
+Date: [DATE]`
+    },
+    'frozen':{
+      subject:'Request: Account Unfreeze — Account [ACC]',
+      body:`Dear Customer Service,
+
+I am writing regarding the unexpected freeze on my bank account which is preventing me from accessing my funds.
+
+Account Details:
+- Account Holder: [NAME]
+- Account Number: [ACC]
+- Date Freeze Noticed: [DATE]
+
+I was not informed of any reason for this freeze. I have no pending legal cases, my Emirates ID is valid, and my KYC was last updated on [REF].
+
+I request:
+1. Written explanation of the specific reason for the account freeze
+2. List of documents required to resolve the matter
+3. Immediate scheduling of an appointment to submit any required documents
+4. Resolution within 5 working days
+
+If this matter is not resolved promptly and a satisfactory explanation not provided, I will escalate to the CBUAE Consumer Protection Department at consumerprotection.centralbank.ae.
+
+Yours faithfully,
+[NAME]
+Emirates ID: [REF]
+Mobile: [Your mobile]`
+    },
+    'bounce':{
+      subject:'Settlement Request — Cheque Return Notice',
+      body:`Dear [Recipient Name],
+
+I am writing to acknowledge the return of cheque number [REF] dated [DATE] for the amount of [REF], drawn on account [ACC].
+
+I sincerely apologise for this situation and wish to resolve this matter immediately and amicably without involving legal proceedings.
+
+I propose to:
+1. Transfer the full amount of [REF] via bank transfer by [Date — within 2-3 days]
+2. Cover any bank charges incurred due to the return
+
+I request you to kindly:
+1. Accept this payment commitment
+2. Allow me [Number] working days to arrange the funds
+3. Refrain from filing a police/court case while this settlement is being arranged
+
+I assure you this will be resolved fully and immediately. Please contact me at [Your number] to confirm.
+
+Sincerely,
+[NAME]`
+    },
+    'complaint':{
+      subject:'Formal Complaint — Unresolved Banking Issue — CBUAE Escalation',
+      body:`The Consumer Protection Department
+Central Bank of the UAE (CBUAE)
+
+Subject: Formal Complaint Against [Bank Name]
+
+Dear Sir/Madam,
+
+I write to formally escalate my complaint against [Bank Name] which has remained unresolved despite [DAYS] days since my initial complaint dated [DATE].
+
+Complainant Details:
+- Name: [NAME]
+- Account Number: [ACC]
+- Emirates ID: [REF]
+
+Nature of Complaint:
+[Describe issue clearly — e.g. unauthorized charge, refund not received, account frozen without reason]
+
+Steps Already Taken:
+- Complaint filed with bank on [DATE]
+- Bank response: [None received / Unsatisfactory response]
+- Amount in dispute: [REF]
+
+I request CBUAE to:
+1. Investigate this matter urgently
+2. Direct [Bank Name] to resolve within their mandated timeframe
+3. Ensure appropriate action if bank is found non-compliant
+
+Attachments: [List documents]
+
+Yours faithfully,
+[NAME]
+Date: [DATE]`
+    },
+  },
+  india:{
+    'card-delivery':{
+      subject:'Card Not Delivered — Account [ACC] — Urgent Action Required',
+      body:`Dear Customer Service,
+
+I am writing to report non-delivery of my debit card despite [DAYS] days having passed since application.
+
+Account Details:
+- Account Holder: [NAME]
+- Account Number: [ACC]
+- Card Application Date: [DATE]
+- Reference Number: [REF]
+
+The card has not been delivered to my registered address. I have checked with the courier and there is no delivery attempt record.
+
+I request:
+1. Immediate investigation into card delivery status
+2. Reissuance of card with fresh delivery if the original is lost
+3. Option to collect at branch if delivery is not possible
+
+As per RBI guidelines, please resolve this within 7 working days.
+
+Yours sincerely,
+[NAME]
+Mobile: [Your mobile]`
+    },
+    'refund':{
+      subject:'Refund Not Received — Transaction Reference [REF]',
+      body:`Dear Disputes / Grievance Team,
+
+I am writing to report that a merchant refund has not been credited to my account.
+
+Account Holder: [NAME]
+Account Number: [ACC]
+Original Transaction Date: [DATE]
+Amount: [REF]
+Merchant: [Merchant name]
+Merchant Refund Reference: [If available]
+
+The merchant confirmed the refund on [DATE]. Despite [DAYS] business days passing, the amount has not appeared in my account. As per RBI guidelines, refunds to bank accounts must be processed within 5-7 business days.
+
+I request:
+1. Immediate investigation and tracing of the refund
+2. Credit of the amount or initiation of chargeback
+3. Written update within 5 working days
+
+If unresolved, I will escalate to the RBI Banking Ombudsman.
+
+Yours sincerely,
+[NAME]
+Account: [ACC]`
+    },
+    'fraud':{
+      subject:'URGENT: Unauthorized Transaction — Immediate Freeze Required',
+      body:`Dear Sir/Madam,
+
+I am reporting an unauthorized transaction on my account and request immediate action.
+
+Account Holder: [NAME]
+Account Number: [ACC]
+Unauthorized Transaction Date: [DATE]
+Amount: [REF]
+Transaction Reference: [If available]
+
+I DID NOT authorize this transaction. I suspect my account / card details were compromised.
+
+I immediately request:
+1. Block my card / account with immediate effect
+2. Initiate chargeback / reversal of the fraudulent transaction
+3. Change my net banking credentials / UPI PIN
+4. Provide transaction details for my cybercrime complaint
+
+As per RBI circular on zero liability (RBI/2017-18/15), since I am reporting within 3 days, I should not bear any liability for this unauthorized transaction.
+
+I have also filed complaint at cybercrime.gov.in (Reference: [REF]) and with local police.
+
+Please respond within 24 hours.
+
+Yours sincerely,
+[NAME]
+Mobile: [Your mobile]`
+    },
+    'upi-fail':{
+      subject:'UPI Transaction Failed — Amount Not Reversed — UTR [REF]',
+      body:`Dear Customer Service,
+
+I am writing regarding a failed UPI transaction where the amount was debited from my account but not received by the merchant / reversed.
+
+Account Holder: [NAME]
+Account Number: [ACC]
+Transaction Date: [DATE]
+Amount: [REF]
+UTR Number: [REF]
+UPI App Used: [PhonePe / GPay / Paytm etc.]
+
+It has been [DAYS] hours / days and the amount has not been reversed despite the transaction showing as failed.
+
+As per NPCI guidelines, failed UPI transactions must be automatically reversed within T+1 working day.
+
+I request:
+1. Immediate reversal of the debited amount
+2. Written confirmation of reversal with timeline
+
+If not resolved within 5 working days, I will escalate to the RBI Banking Ombudsman.
+
+Yours sincerely,
+[NAME]
+Account: [ACC]`
+    },
+    'loan-reject':{
+      subject:'Request for Detailed Loan Rejection Reason — Application [REF]',
+      body:`Dear Loans Department,
+
+I am writing regarding the rejection of my loan application dated [DATE].
+
+Applicant: [NAME]
+Account Number: [ACC]
+Loan Application Reference: [REF]
+Loan Type: [Home / Personal / Car / etc.]
+Amount Applied: [REF]
+
+I received a rejection notice but was not provided with a specific reason for rejection. As per RBI guidelines, banks must provide applicants with the reason for credit rejection.
+
+I request:
+1. Written communication of the specific reason(s) for rejection
+2. Information on what steps I can take to address the shortcomings
+3. Guidance on the minimum waiting period before reapplication
+
+This will help me improve my financial profile and reapply successfully.
+
+Yours sincerely,
+[NAME]
+Account: [ACC]`
+    },
+    'fee-dispute':{
+      subject:'Dispute: Unauthorized Bank Charges — Request for Reversal',
+      body:`Dear Grievance Officer,
+
+I am writing to dispute charges applied to my account without prior disclosure or consent.
+
+Account Holder: [NAME]
+Account Number: [ACC]
+Charge Date: [DATE]
+Amount Charged: [REF]
+Nature of Charge: [e.g. Annual maintenance / SMS charges / etc.]
+
+I was not informed of this charge at the time of account opening and it was not mentioned in the account agreement provided to me. As per RBI guidelines, banks must disclose all charges before application.
+
+I request:
+1. Immediate reversal of the amount [REF] to my account
+2. Written explanation of the legal basis for this charge
+3. Updated schedule of charges if new charges have been introduced
+
+If this is not resolved within 30 days, I will file a complaint with the RBI Banking Ombudsman.
+
+Yours sincerely,
+[NAME]
+Account: [ACC]`
+    },
+    'deceased':{
+      subject:'Deceased Account Claim — [Deceased Name] — Account [ACC]',
+      body:`Dear Branch Manager,
+[Bank Name], [Branch Name]
+
+Subject: Request to Process Deceased Account Claim
+
+Respected Sir/Madam,
+
+I am writing to inform you of the passing of [Deceased Name], account holder with your branch, and to request guidance on the claim process.
+
+Deceased Account Details:
+- Account Holder Name: [Deceased Name]
+- Account Number: [ACC]
+- Branch: [Branch name]
+- Date of Death: [DATE]
+
+Claimant Details:
+- Name: [NAME]
+- Relationship: [Son / Daughter / Spouse / Legal Heir]
+- Contact: [Your mobile]
+
+I am the [nominee / legal heir] of the deceased. I am attaching the following documents:
+1. Death Certificate (copy)
+2. My Aadhaar Card (copy)
+3. My PAN Card (copy)
+4. [Succession Certificate / Legal Heir Certificate if no nominee]
+
+I request you to:
+1. Freeze the account immediately to prevent unauthorized withdrawals
+2. Guide me through the complete claim process
+3. Provide the claim form (DA-2) and any additional document requirements
+
+I am available to visit the branch at your convenience.
+
+Yours sincerely,
+[NAME]
+Mobile: [Your mobile]
+Date: [DATE]`
+    },
+    'rbi-complaint':{
+      subject:'Formal Complaint — [Bank Name] — RBI Ombudsman Reference',
+      body:`The Banking Ombudsman
+Reserve Bank of India
+
+Subject: Complaint against [Bank Name] — Unresolved for [DAYS] days
+
+Respected Sir/Madam,
+
+I hereby submit a formal complaint against [Bank Name] under the RBI Integrated Ombudsman Scheme.
+
+Complainant: [NAME]
+Account Number: [ACC]
+Aadhaar / PAN: [REF]
+
+Nature of Complaint:
+[Describe issue clearly and factually]
+
+Amount in Dispute: [REF]
+
+Timeline:
+- Incident Date: [DATE]
+- Complaint filed with bank: [Date]
+- Bank response: None received / Unsatisfactory
+
+Despite [DAYS] days, the bank has not resolved this matter. I request the Banking Ombudsman to investigate and direct the bank to resolve this matter and provide appropriate compensation for the inconvenience caused.
+
+Documents attached: [List all documents]
+
+Yours faithfully,
+[NAME]
+Date: [DATE]`
+    },
+  }
+};
+
+// ═══════════ STATE ═══════════
+let curMode='uae', curPer='student', curCat=null, curProc=null;
+let emailType=null;
+
+// ═══════════ INIT ═══════════
+function init(){
+  renderPersonas();
+  renderCats();
+  renderFaqs();
+  renderEmailCats();
+  initUpload();
+}
+
+function toggleMode(){
+  curMode = curMode==='uae'?'india':'uae';
+  const btn=document.getElementById('modeBtn');
+  if(curMode==='uae'){
+    btn.textContent='🇦🇪 UAE Model';
+    btn.className='modebadge badge-uae';
+    document.getElementById('heroMsg').textContent="Hello! I'm Auxora — your active UAE banking bridge. I collect information, verify documents, fill forms, write emails, and guide every step.";
+  } else {
+    btn.textContent='🇮🇳 India Model';
+    btn.className='modebadge badge-india';
+    document.getElementById('heroMsg').textContent="नमस्ते! मैं Auxora India हूं। आपकी बैंकिंग समस्या बताइए या नीचे से चुनें।";
+  }
+  renderPersonas();
+  renderCats();
+  renderFaqs();
+  renderEmailCats();
+}
+
+function renderPersonas(){
+  const row=document.getElementById('perrow');
+  row.innerHTML=personas[curMode].map((p,i)=>`
+    <button class="per ${i===0?'on':''}" onclick="setPer('${p.id}',this)">
+      <span class="per-ico">${p.ico}</span>${p.label}
+    </button>`).join('');
+  curPer=personas[curMode][0].id;
+}
+
+function setPer(id,el){
+  curPer=id;
+  document.querySelectorAll('.per').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  renderCats();
+}
+
+function renderCats(){
+  const grid=document.getElementById('catgrid');
+  const allCats=(cats[curMode]||[]);
+  const filtered=allCats.filter(c=>{
+    if(!c.perSub)return true;
+    return c.perSub[curPer]&&c.perSub[curPer]!=='—';
+  });
+  grid.innerHTML=filtered.map(c=>{
+    const sub=(c.perSub&&c.perSub[curPer])?c.perSub[curPer]:c.sub;
+    return `<button class="pcard" onclick="selectCat('${c.id}')">
+      <div class="pcard-ico">${c.ico}</div>
+      <div class="pcard-name">${c.name}</div>
+      <div class="pcard-sub">${sub}</div>
+    </button>`;
+  }).join('');
+}
+
+function selectCat(id){
+  if(id==='faq'){showTab('faq');return;}
+  curCat=id;
+  const cat=(cats[curMode]||[]).find(c=>c.id===id);
+  document.getElementById('bc1').textContent=cat?cat.name:id;
+  document.getElementById('s1msg').textContent=`Select a ${cat?cat.name:id} procedure below.`;
+  const list=(procs[curMode]||{})[id]||[];
+  document.getElementById('proclist').innerHTML=list.length?
+    list.map(p=>`<div class="proc" onclick="selectProc('${id}','${p.id}')">
+      <div><div class="proc-t">${p.name}</div><div class="proc-d">${p.desc}</div></div>
+      <span style="color:#555">›</span>
+    </div>`).join(''):
+    `<div class="alert ai">Procedures for this category are coming soon. Use the FAQ or Email tabs for help.</div>`;
+  showTab('procs');
+}
+
+function selectProc(cat,id){
+  const proc=((procs[curMode]||{})[cat]||[]).find(p=>p.id===id);
+  if(!proc)return;
+  curProc=proc;
+  const catObj=(cats[curMode]||[]).find(c=>c.id===cat);
+  document.getElementById('bc2a').textContent=catObj?catObj.name:cat;
+  document.getElementById('bc2b').textContent=proc.name;
+  document.getElementById('s2msg').textContent=`Complete guide: ${proc.name}`;
+  document.getElementById('s2tip').textContent=proc.tip||'';
+  document.getElementById('s2tip').className=`alert ${proc.tipType==='as'?'as':proc.tipType==='ae'?'ae':proc.tipType==='aw'?'aw':'ai'}`;
+  document.getElementById('mdocs').textContent=(proc.docs||[]).length;
+  document.getElementById('mdays').textContent=proc.days||'—';
+  document.getElementById('mvisits').textContent=proc.visits||'—';
+  const tags=['required','required','required','conditional','optional'];
+  document.getElementById('doclist').innerHTML=(proc.docs||[]).map((d,i)=>`
+    <div class="doccard">
+      <div class="dot" id="d${i}">?</div>
+      <div class="dtxt">
+        <div class="dname">${d}<span class="tag ${i<3?'tag-r':i===3?'tag-c':'tag-o'}">${i<3?'required':i===3?'conditional':'optional'}</span></div>
+        <div class="dnote" id="dn${i}">Not yet verified</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('readbar').style.width='0%';
+  document.getElementById('barlabel').textContent='Upload documents to verify';
+  document.getElementById('verdictbox').style.display='none';
+  document.getElementById('steplist').innerHTML=(proc.steps||[]).map((s,i)=>`
+    <div class="step">
+      <div class="snum" id="sn${i}">${i+1}</div>
+      <div><div class="stitle">${s.t}</div><div class="sdet">${s.d}</div></div>
+    </div>`).join('');
+  document.getElementById('s2alert').innerHTML=proc.alert?`<div class="alert ${proc.alertType==='ae'?'ae':proc.alertType==='as'?'as':proc.alertType==='aw'?'aw':'ai'}">${proc.alert}</div>`:'';
+  document.getElementById('guideTab').style.display='';
+  showTab('guide');
+}
+
+function simVerify(){
+  if(!curProc)return;
+  document.getElementById('fileInput').click();
+}
+
+// Real file upload handler
+function initUpload(){
+  const zone=document.getElementById('uploadZone');
+  const input=document.getElementById('fileInput');
+  if(!zone||!input)return;
+
+  // Drag and drop
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.borderColor='#7c3aed';zone.style.background='#1a1a2e';});
+  zone.addEventListener('dragleave',e=>{e.preventDefault();zone.style.borderColor='#333';zone.style.background='#111';});
+  zone.addEventListener('drop',e=>{e.preventDefault();zone.style.borderColor='#333';zone.style.background='#111';handleFiles(e.dataTransfer.files);});
+
+  // Click browse
+  zone.addEventListener('click',e=>{if(e.target.tagName!=='SPAN')input.click();});
+  input.addEventListener('change',()=>{if(input.files.length)handleFiles(input.files);});
+}
+
+function handleFiles(files){
+  if(!curProc)return;
+  const container=document.getElementById('uploadedFiles');
+  const docs=curProc.docs||[];
+  const total=docs.length;
+  let matched=0;
+
+  // Show uploaded files
+  container.innerHTML='';
+  const fileArr=Array.from(files);
+  fileArr.forEach(f=>{
+    const div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:12px;color:#888;border-top:1px solid #f0f0f0';
+    const ext=f.name.split('.').pop().toLowerCase();
+    const ico=ext==='pdf'?'📄':(['jpg','jpeg','png'].includes(ext)?'🖼️':'📎');
+    const size=(f.size/1024).toFixed(1);
+    div.innerHTML=`<span>${ico}</span><span style="flex:1;color:#111;font-weight:500">${f.name}</span><span style="color:#999">${size} KB</span><span style="color:#16a34a;font-weight:600">✓</span>`;
+    container.appendChild(div);
+  });
+
+  // AI verification logic — match files to required docs
+  const keywords={
+    'emirates id':['emirates','eid','id_card','identity','national_id'],
+    'passport':['passport','visa','travel_doc'],
+    'salary':['salary','payslip','income','wage','certificate'],
+    'tenancy':['tenancy','utility','ejari','dewa','etisalat','address','rent'],
+    'photo':['photo','passport_photo','selfie','pic','image'],
+    'trade license':['trade','license','commercial','business_reg'],
+    'death certificate':['death','certificate','mofa'],
+    'will':['will','difc','testament'],
+    'aadhaar':['aadhaar','aadhar','uid'],
+    'pan':['pan','income_tax'],
+    'bank statement':['statement','bank_statement','account'],
+    'fir':['fir','police','complaint'],
+    'receipt':['receipt','slip','atm','transaction']
+  };
+
+  const fileNames=fileArr.map(f=>f.name.toLowerCase());
+
+  for(let i=0;i<total;i++){
+    const docName=docs[i].toLowerCase();
+    const dot=document.getElementById('d'+i);
+    const note=document.getElementById('dn'+i);
+    if(!dot||!note)continue;
+
+    let found=false;
+    for(const [key,vals] of Object.entries(keywords)){
+      if(docName.includes(key)||vals.some(v=>docName.includes(v))){
+        if(fileNames.some(fn=>vals.some(v=>fn.includes(v))||fn.includes(key.split(' ')[0]))){
+          found=true;break;
+        }
+      }
+    }
+
+    // Also match by general file presence
+    if(!found&&fileArr.length>i)found=true;
+
+    if(found){
+      dot.className='dot ok';dot.textContent='✓';
+      note.textContent='Uploaded — verified ✓';
+      note.style.color='#22c55e';
+      matched++;
+    } else {
+      dot.className='dot wn';dot.textContent='!';
+      note.textContent='Not found in uploads — please add';
+      note.style.color='#f59e0b';
+    }
+  }
+
+  // Update progress
+  const pct=Math.round(matched/total*100);
+  document.getElementById('readbar').style.width=pct+'%';
+  document.getElementById('barlabel').textContent=`${pct}% ready — ${matched}/${total} documents uploaded`;
+
+  const vb=document.getElementById('verdictbox');
+  vb.style.display='flex';
+  if(pct>=100){
+    vb.className='verdict vr';
+    vb.textContent='✅ All documents uploaded — you are ready to visit the bank!';
+  } else if(pct>=60){
+    vb.className='verdict vw';
+    vb.textContent=`⚠️ ${total-matched} document${total-matched>1?'s':''} still needed — upload to complete`;
+  } else {
+    vb.className='verdict vw';
+    vb.textContent=`📋 ${matched}/${total} uploaded — add remaining documents`;
+  }
+
+  // Mark steps as progressing
+  for(let i=0;i<Math.min(2,(curProc.steps||[]).length);i++){
+    const s=document.getElementById('sn'+i);
+    if(s&&matched>0){s.className='snum done';s.textContent='✓';}
+  }
+}
+
+function renderFaqs(){
+  const list=faqs[curMode]||[];
+  const cats=[...new Set(list.map(f=>f.cat))];
+  document.getElementById('faqlist').innerHTML=cats.map(cat=>`
+    <div class="faq-cat">${cat}</div>
+    ${list.filter(f=>f.cat===cat).map((f,i)=>`
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>${f.q}</span><span>▼</span>
+        </div>
+        <div class="faq-a">
+          <div style="margin-bottom:8px;font-weight:600">${f.a}</div>
+          ${f.steps.map((s,j)=>`<div class="step-mini"><div class="sn-mini">${j+1}</div><div>${s}</div></div>`).join('')}
+          ${f.email?`<div style="margin-top:10px"><button class="btn btnp" style="font-size:11px;padding:5px 10px" onclick="goEmail('${f.email}')">Write email for this ✉️</button></div>`:''}
+        </div>
+      </div>`).join('')}`).join('');
+}
+
+function filterFaq(val){
+  const v=val.toLowerCase();
+  document.querySelectorAll('.faq-item').forEach(el=>{
+    const q=el.querySelector('.faq-q').textContent.toLowerCase();
+    el.style.display=(!v||q.includes(v))?'':'none';
+  });
+}
+
+function toggleFaq(el){
+  const a=el.nextElementSibling;
+  a.classList.toggle('on');
+  el.querySelector('span:last-child').textContent=a.classList.contains('on')?'▲':'▼';
+}
+
+function renderEmailCats(){
+  const templates=emailTemplates[curMode]||{};
+  const labels={
+    'card-delivery':'Card not delivered','refund':'Refund not received',
+    'wps':'WPS salary issue','wrong-transfer':'Wrong transfer',
+    'frozen':'Account frozen','bounce':'Cheque bounce settlement',
+    'complaint':'CBUAE / Formal complaint','fraud':'Fraud / Unauthorized txn',
+    'upi-fail':'UPI payment failed','loan-reject':'Loan rejection reason',
+    'fee-dispute':'Fee dispute','deceased':'Deceased account claim',
+    'rbi-complaint':'RBI Ombudsman complaint'
+  };
+  document.getElementById('emailCats').innerHTML=Object.keys(templates).map(k=>`
+    <button class="etag" onclick="selectEmail('${k}',this)">${labels[k]||k}</button>`).join('');
+}
+
+function selectEmail(key,el){
+  emailType=key;
+  document.querySelectorAll('.etag').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  renderEmail();
+}
+
+function renderEmail(){
+  if(!emailType)return;
+  const t=(emailTemplates[curMode]||{})[emailType];
+  if(!t)return;
+  const name=document.getElementById('eName').value||'[YOUR FULL NAME]';
+  const acc=document.getElementById('eAcc').value||'[ACCOUNT NUMBER]';
+  const ref=document.getElementById('eRef').value||'[REFERENCE / AMOUNT]';
+  const dt=document.getElementById('eDate').value||'[DATE]';
+  const body=t.body.replace(/\[NAME\]/g,name).replace(/\[ACC\]/g,acc).replace(/\[REF\]/g,ref).replace(/\[DATE\]/g,dt);
+  document.getElementById('emailPreview').textContent=`Subject: ${t.subject.replace(/\[ACC\]/g,acc).replace(/\[REF\]/g,ref)}\n\n${body}`;
+}
+
+function copyEmail(){
+  const text=document.getElementById('emailPreview').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById('copyBtn');
+    btn.textContent='✅ Copied!';btn.className='copy-btn copied';
+    document.getElementById('copyMsg').textContent='Email copied — paste into your email client';
+    setTimeout(()=>{btn.textContent='📋 Copy email';btn.className='copy-btn';},2500);
+  });
+}
+
+function goEmail(type){
+  if(emailTemplates[curMode]&&emailTemplates[curMode][type]){
+    showTab('email');
+    setTimeout(()=>{
+      const btn=document.querySelector(`[onclick="selectEmail('${type}',this)"]`);
+      if(btn){btn.click();}
+    },100);
+  } else {
+    showTab('email');
+  }
+}
+
+function doSearch(val){
+  if(!val||val.length<2)return;
+  const v=val.toLowerCase();
+  const map={
+    'card':'cards','lost card':'cards','blocked':'cards','delivery':'cards','stuck':'cards',
+    'salary':'transfer','wps':'transfer','not paid':'transfer','not received':'transfer',
+    'send money':'transfer','remit':'transfer',
+    'refund':'refund','money back':'refund','not returned':'refund',
+    'fraud':'complaint','scam':'complaint','unauthorized':'refund',
+    'account':'account','open':'account','kyc':'account',
+    'home loan':'loan','car loan':'loan','personal loan':'loan','mudra':'loan',
+    'death':'deceased','died':'deceased','deceased':'deceased','papa nahi':'deceased','passed':'deceased',
+    'cheque':'cheque','bounce':'cheque','bounced':'cheque',
+    'business':'business','company':'business',
+    'complaint':'complaint','rbi':'complaint','cbuae':'complaint'
+  };
+  for(const k in map){if(v.includes(k)){selectCat(map[k]);return;}}
+}
+
+function showTab(id,el){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  const scrMap={home:'scr-home',procs:'scr-procs',guide:'scr-guide',faq:'scr-faq',email:'scr-email'};
+  const scr=document.getElementById(scrMap[id]||'scr-'+id);
+  if(scr)scr.classList.add('on');
+  if(el)el.classList.add('on');
+  else{
+    const tabs=document.querySelectorAll('.tab');
+    const tabMap={home:0,faq:1,email:2,guide:3};
+    if(tabMap[id]!==undefined&&tabs[tabMap[id]])tabs[tabMap[id]].classList.add('on');
+  }
+}
+
+init();
+</script>
+</body>
+</html>
