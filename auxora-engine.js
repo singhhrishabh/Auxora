@@ -99,6 +99,19 @@ function init() {
   // Send button
   document.getElementById('sendBtn').onclick = doSend;
 
+  // Document upload
+  var uploadBtn = document.getElementById('uploadBtn');
+  var docFileInput = document.getElementById('docFileInput');
+  if (uploadBtn && docFileInput) {
+    uploadBtn.onclick = function() { docFileInput.click(); };
+    docFileInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        handleDocUpload(this.files[0]);
+        this.value = '';
+      }
+    });
+  }
+
   // API controls
   document.getElementById('apiProv').addEventListener('change', function() {
     var v = this.value;
@@ -388,4 +401,133 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+// ---- DOCUMENT SCANNER INTEGRATION ----
+function handleDocUpload(file) {
+  if (loading) return;
+
+  // Show user upload bubble
+  var m = document.getElementById('msgs');
+  var userMsg = document.createElement('div');
+  userMsg.className = 'msg user';
+  userMsg.innerHTML = '<div class="avatar u">U</div><div class="bubble u">📎 Uploaded: <strong>' + esc(file.name) + '</strong> (' + (file.size / 1024).toFixed(1) + ' KB)</div>';
+  m.appendChild(userMsg);
+  scrollB();
+
+  // Show scanning progress
+  var progId = 'scan-' + Date.now();
+  var progMsg = document.createElement('div');
+  progMsg.className = 'msg';
+  progMsg.id = progId;
+  progMsg.innerHTML = '<div class="avatar ai">A</div><div class="bubble ai"><div class="scan-progress"><div class="scan-spinner"></div><span id="' + progId + '-txt">Reading file...</span></div></div>';
+  m.appendChild(progMsg);
+  scrollB();
+
+  loading = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  var key = (apiCfg.provider === 'gemini' && apiCfg.key) ? apiCfg.key : '';
+
+  if (typeof AuxoraScanner === 'undefined') {
+    var el = document.getElementById(progId);
+    if (el) el.remove();
+    addAI('⚠️ Document scanner not loaded. Please refresh the page.');
+    loading = false;
+    document.getElementById('sendBtn').disabled = false;
+    return;
+  }
+
+  AuxoraScanner.scan(file, {
+    apiKey: key,
+    onProgress: function(stage, msg) {
+      var txt = document.getElementById(progId + '-txt');
+      if (txt) txt.textContent = msg;
+    }
+  }).then(function(result) {
+    var el = document.getElementById(progId);
+    if (el) el.remove();
+    addScanResult(result);
+    loading = false;
+    document.getElementById('sendBtn').disabled = false;
+    document.getElementById('chatIn').focus();
+  }).catch(function(err) {
+    var el = document.getElementById(progId);
+    if (el) el.remove();
+    addAI('⚠️ Scan failed: ' + err.message + '\n\nPlease try again or use a clearer image.');
+    loading = false;
+    document.getElementById('sendBtn').disabled = false;
+  });
+}
+
+function addScanResult(result) {
+  var m = document.getElementById('msgs');
+  var d = document.createElement('div');
+  d.className = 'msg';
+
+  var statusClass = result.verification.overallStatus === 'pass' ? 'scan-badge-pass' : (result.verification.overallStatus === 'warn' ? 'scan-badge-warn' : 'scan-badge-fail');
+  var statusLabel = result.verification.overallStatus === 'pass' ? '✓ Verified' : (result.verification.overallStatus === 'warn' ? '⚠ Review' : '✗ Issues');
+
+  var html = '<div class="avatar ai">A</div><div class="bubble ai">';
+  html += '<div class="scan-card">';
+  html += '<div class="scan-header">📄 ' + esc(result.documentLabel) + ' <span class="scan-type-badge ' + statusClass + '">' + statusLabel + '</span></div>';
+
+  // Fields
+  var fields = result.fields;
+  var fieldKeys = Object.keys(fields).filter(function(k) { return fields[k] !== null && fields[k] !== undefined && fields[k] !== ''; });
+  if (fieldKeys.length > 0) {
+    html += '<div class="scan-fields">';
+    var labels = {
+      fullName:'Full Name', nameArabic:'Name (Arabic)', idNumber:'ID Number', nationality:'Nationality',
+      dateOfBirth:'Date of Birth', expiryDate:'Expiry Date', gender:'Gender', occupation:'Occupation',
+      cardNumber:'Card Number', passportNumber:'Passport No.', issueDate:'Issue Date', issuingAuthority:'Issuing Authority',
+      employerName:'Employer', employeeName:'Employee', designation:'Designation', basicSalary:'Basic Salary',
+      totalSalary:'Total Salary', stampPresent:'Stamp Present', companyName:'Company', licenseNumber:'License No.',
+      activityType:'Activity', jurisdiction:'Jurisdiction', tenantName:'Tenant', landlordName:'Landlord',
+      propertyAddress:'Address', ejariNumber:'Ejari No.', startDate:'Start Date', endDate:'End Date',
+      annualRent:'Annual Rent', accountHolder:'Account Holder', accountNumber:'Account No.', bankName:'Bank',
+      statementPeriod:'Period', closingBalance:'Balance', visaNumber:'Visa No.', sponsor:'Sponsor',
+      visaType:'Visa Type', provider:'Provider', billingPeriod:'Billing Period', amountDue:'Amount Due',
+      creditScore:'Credit Score', reportDate:'Report Date', totalAccounts:'Total Accounts', overdueAccounts:'Overdue'
+    };
+    fieldKeys.forEach(function(k) {
+      var val = fields[k];
+      if (typeof val === 'boolean') val = val ? 'Yes ✓' : 'No ✗';
+      html += '<div class="scan-field"><span class="scan-field-label">' + (labels[k] || k) + '</span><span class="scan-field-value">' + esc(String(val)) + '</span></div>';
+    });
+    html += '</div>';
+  }
+
+  // Verification checks
+  var checks = result.verification.checks || [];
+  if (checks.length > 0) {
+    html += '<div class="scan-checks">';
+    checks.forEach(function(c) {
+      var icon = c.status === 'pass' ? '✓' : (c.status === 'warn' ? '!' : '✗');
+      var cls = 'sc-' + c.status;
+      html += '<div class="scan-check"><span class="scan-check-icon ' + cls + '">' + icon + '</span><span><strong>' + esc(c.label) + ':</strong> ' + esc(c.detail) + '</span></div>';
+    });
+    html += '</div>';
+  }
+
+  // Warnings / errors
+  if (result.verification.errors.length > 0) {
+    html += '<div style="margin-top:8px;padding:8px 10px;background:var(--red-bg);border:1px solid #991b1b;border-radius:6px;font-size:11.5px;color:#ef4444">';
+    result.verification.errors.forEach(function(e) { html += '🚨 ' + esc(e) + '<br>'; });
+    html += '</div>';
+  }
+  if (result.verification.warnings.length > 0) {
+    html += '<div style="margin-top:6px;padding:8px 10px;background:var(--amber-bg);border:1px solid #92400e;border-radius:6px;font-size:11.5px;color:#f59e0b">';
+    result.verification.warnings.forEach(function(w) { html += '⚠️ ' + esc(w) + '<br>'; });
+    html += '</div>';
+  }
+
+  html += '</div></div>';
+  d.innerHTML = html;
+  m.appendChild(d);
+  scrollB();
+
+  // Store in chat history
+  chatHist.push({role:'assistant', content:'[Document scanned: ' + result.documentLabel + '] ' + JSON.stringify(result.fields)});
+}
+
 })();
